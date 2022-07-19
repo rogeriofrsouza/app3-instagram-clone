@@ -1,1 +1,8 @@
-<div class="banner-background"></div>
+<div class="banner-background">
+  <img 
+    *ngFor="let imagem of imagens" 
+    [src]="imagem.url" 
+    [alt]="imagem.alt" 
+    [@banner]="imagem.estado" 
+  />
+</div>
