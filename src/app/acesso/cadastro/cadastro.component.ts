@@ -1,6 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
+import { Usuario } from './../../shared/models/usuario.model';
+import { AutenticacaoService } from './../../shared/services/autenticacao.service';
+
 @Component({
   selector: 'app-cadastro',
   templateUrl: './cadastro.component.html',
@@ -17,7 +20,7 @@ export class CadastroComponent implements OnInit {
     'senha': new FormControl(null, [ Validators.required, Validators.minLength(5) ])
   });
 
-  constructor() { }
+  constructor(private autenticacaoService: AutenticacaoService) { }
 
   ngOnInit(): void {
   }
@@ -31,8 +34,10 @@ export class CadastroComponent implements OnInit {
 
     if (this.formulario.status === 'INVALID') {
       this.formulario.markAllAsTouched();
-    } else {
       
+    } else {
+      let usuario: Usuario = this.formulario.value;
+      this.autenticacaoService.cadastrarUsuario(usuario);
     }
   }
 
