@@ -10,6 +10,9 @@ import { LoginComponent } from './acesso/login/login.component';
 import { AppComponent } from './app.component';
 import { AutenticacaoService } from './shared/services/autenticacao.service';
 
+import { AngularFireModule } from '@angular/fire/compat';
+import { environment } from '../environments/environment';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +24,8 @@ import { AutenticacaoService } from './shared/services/autenticacao.service';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule, 
+    AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [
     AutenticacaoService
