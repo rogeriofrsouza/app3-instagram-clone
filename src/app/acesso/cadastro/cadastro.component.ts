@@ -31,7 +31,8 @@ export class CadastroComponent implements OnInit {
       
     } else {
       let usuario: Usuario = this.formulario.value;
-      this.autenticacaoService.cadastrarUsuario(usuario);
+      this.autenticacaoService.cadastrarUsuario(usuario)
+        .then(() => this.exibirPainelLogin());
     }
   }
 

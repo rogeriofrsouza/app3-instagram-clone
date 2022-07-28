@@ -11,10 +11,10 @@ export class AutenticacaoService {
 
   constructor() { }
 
-  public cadastrarUsuario(usuario: Usuario): void {
+  public cadastrarUsuario(usuario: Usuario): Promise<any> {
     const auth: Auth = getAuth();
     
-    createUserWithEmailAndPassword(auth, usuario.email, usuario.senha)
+    return createUserWithEmailAndPassword(auth, usuario.email, usuario.senha)
       .then((user: UserCredential) => {
         console.log(user);
         usuario.senha = '';
