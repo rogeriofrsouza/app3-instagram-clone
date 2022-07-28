@@ -14,7 +14,7 @@ export class CadastroComponent implements OnInit {
   @Output() exibirPainel: EventEmitter<string> = new EventEmitter<string>();
 
   public formulario: FormGroup = new FormGroup({
-    'email': new FormControl(null, [ Validators.required, Validators.minLength(5) ]),
+    'email': new FormControl(null, [ Validators.required, Validators.minLength(5), Validators.email ]),
     'nome': new FormControl(null, [ Validators.required, Validators.minLength(5), Validators.maxLength(50) ]),
     'usuario': new FormControl(null, [ Validators.required, Validators.minLength(5), Validators.maxLength(20) ]),
     'senha': new FormControl(null, [ Validators.required, Validators.minLength(5) ])
@@ -30,8 +30,6 @@ export class CadastroComponent implements OnInit {
   }
 
   public cadastrarUsuario(): void {
-    console.log(this.formulario);
-
     if (this.formulario.status === 'INVALID') {
       this.formulario.markAllAsTouched();
       

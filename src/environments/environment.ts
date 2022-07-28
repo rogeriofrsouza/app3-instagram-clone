@@ -11,7 +11,8 @@ export const environment = {
     storageBucket: "instagram-clone-a1667.appspot.com",
     messagingSenderId: "601555313392",
     appId: "1:601555313392:web:f9e11ab31b8e19386e1835",
-    measurementId: "G-G8TWGWFMGW"
+    measurementId: "G-G8TWGWFMGW",
+    databaseURL: "https://instagram-clone-a1667-default-rtdb.firebaseio.com"
   }
 };
 
