@@ -25,10 +25,6 @@ export class CadastroComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public exibirPainelLogin(): void {
-    this.exibirPainel.emit('login');
-  }
-
   public cadastrarUsuario(): void {
     if (this.formulario.status === 'INVALID') {
       this.formulario.markAllAsTouched();
@@ -37,6 +33,10 @@ export class CadastroComponent implements OnInit {
       let usuario: Usuario = this.formulario.value;
       this.autenticacaoService.cadastrarUsuario(usuario);
     }
+  }
+
+  public exibirPainelLogin(): void {
+    this.exibirPainel.emit('login');
   }
 
 }

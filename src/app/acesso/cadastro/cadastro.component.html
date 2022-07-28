@@ -4,44 +4,52 @@
     
     <form [formGroup]="formulario" (ngSubmit)="cadastrarUsuario()">
       <!-- Email -->
-      <input 
-        type="email" 
-        class="form-control" 
-        placeholder="E-mail" 
-        formControlName="email" 
-      />
-      <div *ngIf="formulario.get('email')?.valid && formulario.get('email')?.touched" class="valid-feedback">OK</div>
-      <div *ngIf="formulario.get('email')?.invalid && formulario.get('email')?.touched" class="invalid-feedback">Email inválido</div>
+      <div class="d-flex align-items-center">
+        <input 
+          type="email" 
+          class="form-control" 
+          placeholder="E-mail" 
+          formControlName="email" 
+        />
+        <span *ngIf="formulario.get('email')?.valid && formulario.get('email')?.touched" class="icon-check-circle"></span>
+        <span *ngIf="formulario.get('email')?.invalid && formulario.get('email')?.touched" class="icon-x-altx-alt"></span>
+      </div>
 
       <!-- Nome -->
-      <input 
-        type="text"
-        class="form-control" 
-        placeholder="Nome completo" 
-        formControlName="nome" 
-      />
-      <div *ngIf="formulario.get('nome')?.valid && formulario.get('nome')?.touched" class="valid-feedback">OK</div>
-      <div *ngIf="formulario.get('nome')?.invalid && formulario.get('nome')?.touched" class="invalid-feedback">Nome inválido</div>
+      <div class="d-flex align-items-center mt-3">
+        <input 
+          type="text"
+          class="form-control" 
+          placeholder="Nome completo" 
+          formControlName="nome" 
+        />
+        <span *ngIf="formulario.get('nome')?.valid && formulario.get('nome')?.touched" class="icon-check-circle"></span>
+        <span *ngIf="formulario.get('nome')?.invalid && formulario.get('nome')?.touched" class="icon-x-altx-alt"></span>
+      </div>
 
       <!-- Usuário -->
-      <input 
-        type="text"
-        class="form-control" 
-        placeholder="Nome de usuário" 
-        formControlName="usuario" 
-      />
-      <div *ngIf="formulario.get('usuario')?.valid && formulario.get('usuario')?.touched" class="valid-feedback">OK</div>
-      <div *ngIf="formulario.get('usuario')?.invalid && formulario.get('usuario')?.touched" class="invalid-feedback">Usuário inválido</div>
+      <div class="d-flex align-items-center mt-3">
+        <input 
+          type="text"
+          class="form-control" 
+          placeholder="Nome de usuário" 
+          formControlName="usuario" 
+        />
+        <span *ngIf="formulario.get('usuario')?.valid && formulario.get('usuario')?.touched" class="icon-check-circle"></span>
+        <span *ngIf="formulario.get('usuario')?.invalid && formulario.get('usuario')?.touched" class="icon-x-altx-alt"></span>
+      </div>
 
       <!-- Senha -->
-      <input 
-        type="password"
-        class="form-control" 
-        placeholder="Senha" 
-        formControlName="senha" 
-      />
-      <div *ngIf="formulario.get('senha')?.valid && formulario.get('senha')?.touched" class="valid-feedback">OK</div>
-      <div *ngIf="formulario.get('senha')?.invalid && formulario.get('senha')?.touched" class="invalid-feedback">Senha inválida</div>
+      <div class="d-flex align-items-center mt-3">
+        <input 
+          type="password"
+          class="form-control" 
+          placeholder="Senha" 
+          formControlName="senha" 
+        />
+        <span *ngIf="formulario.get('senha')?.valid && formulario.get('senha')?.touched" class="icon-check-circle"></span>
+        <span *ngIf="formulario.get('senha')?.invalid && formulario.get('senha')?.touched" class="icon-x-altx-alt"></span>
+      </div>
 
       <button type="submit" class="btn btn-primary btn-sm">Cadastre-se</button>
     </form>

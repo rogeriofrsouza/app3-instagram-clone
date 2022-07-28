@@ -6,12 +6,8 @@
   width: 100%;
 }
 
-input {
-  margin-top: 1rem;
-}
-
-input:nth-child(1) {
-  margin-top: 0;
+.form-control {
+  position: relative;
 }
 
 input.ng-valid.ng-touched {
@@ -22,8 +18,17 @@ input.ng-invalid.ng-touched {
   border: 1px solid #dc3545;
 }
 
-.valid-feedback, .invalid-feedback {
-  display: block;
+.icon-x-altx-alt, .icon-check-circle {
+  position: absolute;
+  right: 28px;
+}
+
+.icon-x-altx-alt {
+  color: #dc3545;
+}
+
+.icon-check-circle {
+  color: #198754;
 }
 
 button {
