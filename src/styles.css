@@ -13,3 +13,7 @@ a {
   text-decoration: none !important;
   cursor: pointer;
 }
+
+.bg-padrao {
+  background: #FAFAFA;
+}

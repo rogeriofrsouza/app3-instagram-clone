@@ -22,7 +22,6 @@ export class LoginComponent implements OnInit {
   constructor(private autenticacaoService: AutenticacaoService) { }
 
   ngOnInit(): void {
-    console.log(this.formulario)
   }
 
   public autenticarUsuario(): void {
