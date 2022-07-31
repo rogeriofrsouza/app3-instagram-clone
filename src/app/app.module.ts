@@ -13,6 +13,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { PublicacoesComponent } from './home/publicacoes/publicacoes.component';
+import { AutenticacaoGuardService } from './shared/services/autenticacao-guard.service';
 import { AutenticacaoService } from './shared/services/autenticacao.service';
 
 @NgModule({
@@ -33,7 +34,8 @@ import { AutenticacaoService } from './shared/services/autenticacao.service';
     AppRoutingModule
   ],
   providers: [
-    AutenticacaoService
+    AutenticacaoService,
+    AutenticacaoGuardService
   ],
   bootstrap: [AppComponent]
 })
