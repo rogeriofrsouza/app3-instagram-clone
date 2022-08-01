@@ -1,0 +1,32 @@
+<!-- Modal -->
+<div class="modal fade" id="incluirPublicacaoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <form [formGroup]="formulario" (ngSubmit)="publicar()">
+
+        <!-- Header -->
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Criar uma publicação</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <!-- Body -->
+        <div class="modal-body">
+          <input 
+            type="text" 
+            placeholder="Título da publicação" 
+            class="form-control"
+            formControlName="titulo" 
+          />
+        </div>
+        
+        <!-- Footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+          <button type="submit" class="btn btn-primary">Publicar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

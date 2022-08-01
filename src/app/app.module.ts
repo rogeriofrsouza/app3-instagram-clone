@@ -12,9 +12,11 @@ import { LoginComponent } from './acesso/login/login.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
+import { IncluirPublicacaoComponent } from './home/incluir-publicacao/incluir-publicacao.component';
 import { PublicacoesComponent } from './home/publicacoes/publicacoes.component';
 import { AutenticacaoGuardService } from './shared/services/autenticacao-guard.service';
 import { AutenticacaoService } from './shared/services/autenticacao.service';
+import { DbService } from './shared/services/db.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { AutenticacaoService } from './shared/services/autenticacao.service';
     LoginComponent,
     CadastroComponent,
     HomeComponent,
-    PublicacoesComponent
+    PublicacoesComponent,
+    IncluirPublicacaoComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +38,8 @@ import { AutenticacaoService } from './shared/services/autenticacao.service';
   ],
   providers: [
     AutenticacaoService,
-    AutenticacaoGuardService
+    AutenticacaoGuardService,
+    DbService
   ],
   bootstrap: [AppComponent]
 })
