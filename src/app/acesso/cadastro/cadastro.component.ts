@@ -14,11 +14,13 @@ export class CadastroComponent implements OnInit {
   @Output() exibirPainel: EventEmitter<string> = new EventEmitter<string>();
 
   public formulario: FormGroup = new FormGroup({
-    'email': new FormControl(null, [ Validators.required, Validators.minLength(5), Validators.email ]),
-    'nome': new FormControl(null, [ Validators.required, Validators.minLength(5), Validators.maxLength(50) ]),
-    'usuario': new FormControl(null, [ Validators.required, Validators.minLength(5), Validators.maxLength(20) ]),
-    'senha': new FormControl(null, [ Validators.required, Validators.minLength(5) ])
+    'email': new FormControl(null, [ Validators.required, Validators.minLength(6), Validators.email ]),
+    'nome': new FormControl(null, [ Validators.required, Validators.minLength(6), Validators.maxLength(50) ]),
+    'usuario': new FormControl(null, [ Validators.required, Validators.minLength(6), Validators.maxLength(20) ]),
+    'senha': new FormControl(null, [ Validators.required, Validators.minLength(6) ])
   });
+
+  public errorMessage: string = '';
 
   constructor(private autenticacaoService: AutenticacaoService) { }
 
@@ -32,7 +34,7 @@ export class CadastroComponent implements OnInit {
     } else {
       let usuario: Usuario = this.formulario.value;
       this.autenticacaoService.cadastrarUsuario(usuario)
-        .then(() => this.exibirPainelLogin());
+        .then((error) => error !== undefined ? this.errorMessage = error.message : this.exibirPainelLogin());
     }
   }
 

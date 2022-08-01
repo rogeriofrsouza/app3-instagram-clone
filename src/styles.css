@@ -1,10 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 @import './assets/fonts/style.css';
 
+/* ===== RESET ========== */
 * {
   box-sizing: border-box;
 }
 
+/* ===== BASE ========== */
 html, body {
   height: 100%;
 }
@@ -14,6 +16,32 @@ a {
   cursor: pointer;
 }
 
+/* ===== LAYOUT ========== */
 .bg-padrao {
   background: #FAFAFA;
+}
+
+.form-control {
+  position: relative;
+}
+
+input.ng-valid.ng-touched {
+  border: 1px solid #198754;
+}
+
+input.ng-invalid.ng-touched {
+  border: 1px solid #dc3545;
+}
+
+.icon-x-altx-alt, .icon-check-circle {
+  position: absolute;
+  right: 28px;
+}
+
+.icon-x-altx-alt {
+  color: #dc3545;
+}
+
+.icon-check-circle {
+  color: #198754;
 }

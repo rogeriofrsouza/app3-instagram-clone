@@ -3,6 +3,7 @@
     <div class="card-title"></div>
     
     <form [formGroup]="formulario" (ngSubmit)="cadastrarUsuario()">
+      
       <!-- Email -->
       <div class="d-flex align-items-center">
         <input 
@@ -51,10 +52,15 @@
         <span *ngIf="formulario.get('senha')?.invalid && formulario.get('senha')?.touched" class="icon-x-altx-alt"></span>
       </div>
 
-      <button type="submit" class="btn btn-primary btn-sm">Cadastre-se</button>
+      <button type="submit" class="btn btn-primary btn-sm mt-3" [disabled]="formulario.status === 'INVALID'">Cadastre-se</button>
     </form>
-    <hr />
+    
+    <div *ngIf="errorMessage.length">
+      <hr />
+      <p class="small text-danger text-center">{{ errorMessage }}</p>
+    </div>
 
+    <hr />
     <p class="div text-center">Ao cadastrar-se, você concorda com nossos <b>Termos</b> e <b>Política de Privacidade</b>.</p>
   </div>
 </div>

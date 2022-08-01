@@ -26,14 +26,17 @@ export class AutenticacaoService {
         const db: Database = getDatabase();
         set(ref(db, `usuario_detalhe/${btoa(usuario.email)}`), usuario);
       })
-      .catch((error: Error) => console.log(error));
+      .catch((error: Error) => {
+        console.log(error);
+        return error;
+      });
   }
 
   //Autenticar usuário
-  public autenticarUsuario(email: string, senha: string): void {
+  public autenticarUsuario(email: string, senha: string): Promise<any> {
     const auth: Auth = getAuth();
 
-    signInWithEmailAndPassword(auth, email, senha)
+    return signInWithEmailAndPassword(auth, email, senha)
       .then((userCredential: UserCredential) => {
         console.log(userCredential);
       
@@ -44,14 +47,17 @@ export class AutenticacaoService {
             this.router.navigateByUrl('/home');
           })
       })
-      .catch((error: Error) => console.log(error));
+      .catch((error: Error) => {
+        console.log(error);
+        return error;
+      });
   }
 
   //Usuário autenticado
   public autenticado(): boolean {
-    let token = localStorage.getItem('idToken');
-    
     if (this.idToken === '') {
+      let token: string | null = localStorage.getItem('idToken');
+      
       token !== null ? this.idToken = token : this.router.navigateByUrl('');
     }
     return this.idToken !== '';

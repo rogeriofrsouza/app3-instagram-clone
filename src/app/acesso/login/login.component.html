@@ -3,24 +3,37 @@
     <div class="card-title"></div>
 
     <form [formGroup]="formulario" (ngSubmit)="autenticarUsuario()">
-      <input 
-        type="email" 
-        class="form-control" 
-        placeholder="E-mail" 
-        formControlName="email"
-      />
-      <input 
-        type="password"
-        class="form-control" 
-        placeholder="Senha" 
-        formControlName="senha"
-      />
-      <button type="submit" class="btn btn-primary btn-sm">Entrar</button>
+
+      <!-- E-mail -->
+      <div class="d-flex align-items-center">
+        <input 
+          type="email" 
+          class="form-control" 
+          placeholder="E-mail" 
+          formControlName="email"
+        />
+        <span *ngIf="formulario.get('email')?.valid && formulario.get('email')?.touched" class="icon-check-circle"></span>
+        <span *ngIf="formulario.get('email')?.invalid && formulario.get('email')?.touched" class="icon-x-altx-alt"></span>
+      </div>
+
+      <!-- Senha -->
+      <div class="d-flex align-items-center mt-3">
+        <input 
+          type="password"
+          class="form-control" 
+          placeholder="Senha" 
+          formControlName="senha"
+        />
+        <span *ngIf="formulario.get('senha')?.valid && formulario.get('senha')?.touched" class="icon-check-circle"></span>
+        <span *ngIf="formulario.get('senha')?.invalid && formulario.get('senha')?.touched" class="icon-x-altx-alt"></span>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-sm mt-3" [disabled]="formulario.status === 'INVALID'">Entrar</button>
     </form>
     
-    <div *ngIf="usuarioNaoAutenticado">
+    <div *ngIf="errorMessage.length">
       <hr />
-      <p class="small text-danger text-center">O nome de usuário inserido não pertence a uma conta. Verifique seu nome de usuário e tente novamente.</p>
+      <p class="small text-danger text-center">{{ errorMessage }}</p>
     </div>
   </div>
 </div>
