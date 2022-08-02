@@ -5,9 +5,9 @@ import { Injectable } from '@angular/core';
 })
 export class ProgressoService {
 
-  public progress: number = 0;
-  public percentage: string = '';
-  public state: string = '';
+  public progresso: number = 0;
+  public estado: string = '';
+  public downloadURL: string = '';
 
   constructor() { }
 }

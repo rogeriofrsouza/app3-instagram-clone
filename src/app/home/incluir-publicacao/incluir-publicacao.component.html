@@ -1,38 +1,64 @@
 <!-- Modal -->
 <div class="modal fade" id="incluirPublicacaoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <div class="modal-content">
+    <div class="modal-content" [ngSwitch]="estadoPublicacao">
+      
+      <!-- Pendente -->
+      <div *ngSwitchCase="'pendente'">
+        <form [formGroup]="formulario" (ngSubmit)="publicar()">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Criar uma publicação</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+  
+          <div class="modal-body">
+            <input 
+              type="file" 
+              class="form-control" 
+              accept="image/*" 
+              (change)="preparaImagemUpload($event)"
+            />
+            <input 
+              type="text" 
+              placeholder="Título da publicação" 
+              class="form-control mt-3"
+              formControlName="titulo" 
+            />
+          </div>
+          
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            <button type="submit" class="btn btn-primary">Publicar</button>
+          </div>
+        </form>
+      </div>
 
-      <form [formGroup]="formulario" (ngSubmit)="publicar()">
-
-        <!-- Header -->
+      <!-- Andamento -->
+      <div *ngSwitchCase="'andamento'">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Criar uma publicação</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Publicação em andamento</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-
-        <!-- Body -->
+  
         <div class="modal-body">
-          <input 
-            type="file" 
-            class="form-control" 
-            accept="image/*" 
-            (change)="preparaImagemUpload($event)"
-          />
-          <input 
-            type="text" 
-            placeholder="Título da publicação" 
-            class="form-control"
-            formControlName="titulo" 
-          />
+          Progresso: {{ progressoUpload }}%
         </div>
-        
-        <!-- Footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-          <button type="submit" class="btn btn-primary">Publicar</button>
+      </div>
+
+      <!-- Concluído -->
+      <div *ngSwitchCase="'concluido'">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Publicação realizada com sucesso</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-      </form>
+  
+        <div class="modal-body">
+          <p>Publicação realizada com sucesso!</p>
+          <p>Arquivo disponível 
+            <a [href]="downloadURL" target="_blank">aqui</a>.
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </div>

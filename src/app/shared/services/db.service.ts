@@ -21,22 +21,21 @@ export class DbService {
 
     uploadTask.on('state_changed', 
       (snapshot: UploadTaskSnapshot) => {
-        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        this.progressoService.progress = progress;
-        this.progressoService.percentage = `Upload is ${progress}% done`;
+        this.progressoService.progresso = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
 
         switch (snapshot.state) {
-          case 'paused': this.progressoService.state = 'Upload is paused'; break;
-          case 'running': this.progressoService.state = 'Upload is running'; break;
+          case 'paused': this.progressoService.estado = 'interrompido'; break;
+          case 'running': this.progressoService.estado = 'andamento'; break;
         }
       }, 
       (error: StorageError) => {
-        this.progressoService.state = 'Error on upload';
+        this.progressoService.estado = 'erro';
         console.log(error);
       }, 
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL: string) => {
-          this.progressoService.state = `File available at ${downloadURL}`;
+          this.progressoService.estado = 'concluido';
+          this.progressoService.downloadURL = downloadURL;
         });
       }
     );
