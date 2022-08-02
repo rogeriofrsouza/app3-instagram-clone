@@ -16,6 +16,7 @@ export class IncluirPublicacaoComponent implements OnInit {
   })
 
   public email: string = '';
+  private imagem: FileList | null = null;
 
   constructor(private db: DbService) { }
 
@@ -23,19 +24,22 @@ export class IncluirPublicacaoComponent implements OnInit {
     const auth: Auth = getAuth();
 
     onAuthStateChanged(auth, (user) => {
-      console.log(user);
-
       if (user) {
         this.email = user.email !== null ? user.email : '';
       }
-    })
+    });
   }
 
   public publicar(): void {
     this.db.publicar({
       email: this.email,
-      titulo: this.formulario.value.titulo
+      titulo: this.formulario.value.titulo,
+      imagem: this.imagem?.item(0)
     });
+  }
+
+  public preparaImagemUpload(event: Event): void {
+    this.imagem = (<HTMLInputElement>event.target).files;
   }
 
 }
