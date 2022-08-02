@@ -17,6 +17,7 @@ import { PublicacoesComponent } from './home/publicacoes/publicacoes.component';
 import { AutenticacaoGuardService } from './shared/services/autenticacao-guard.service';
 import { AutenticacaoService } from './shared/services/autenticacao.service';
 import { DbService } from './shared/services/db.service';
+import { ProgressoService } from './shared/services/progresso.service';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { DbService } from './shared/services/db.service';
   providers: [
     AutenticacaoService,
     AutenticacaoGuardService,
-    DbService
+    DbService,
+    ProgressoService
   ],
   bootstrap: [AppComponent]
 })

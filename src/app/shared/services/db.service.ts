@@ -1,3 +1,4 @@
+import { ProgressoService } from './progresso.service';
 import { Injectable } from '@angular/core';
 import { Database, getDatabase, push, ref as databaseRef } from 'firebase/database';
 import { FirebaseStorage, getDownloadURL, getStorage, ref as storageRef, StorageError, uploadBytesResumable, UploadTaskSnapshot } from 'firebase/storage';
@@ -7,7 +8,7 @@ import { FirebaseStorage, getDownloadURL, getStorage, ref as storageRef, Storage
 })
 export class DbService {
 
-  constructor() { }
+  constructor(private progressoService: ProgressoService) { }
 
   public publicar(publicacao: any): void {
     const db: Database = getDatabase();
@@ -20,20 +21,22 @@ export class DbService {
 
     uploadTask.on('state_changed', 
       (snapshot: UploadTaskSnapshot) => {
-        const progress: number = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log('Upload is ' + progress + '% done');
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        this.progressoService.progress = progress;
+        this.progressoService.percentage = `Upload is ${progress}% done`;
 
         switch (snapshot.state) {
-          case 'paused': console.log('Upload is paused'); break;
-          case 'running': console.log('Upload is running'); break;
+          case 'paused': this.progressoService.state = 'Upload is paused'; break;
+          case 'running': this.progressoService.state = 'Upload is running'; break;
         }
       }, 
       (error: StorageError) => {
+        this.progressoService.state = 'Error on upload';
         console.log(error);
       }, 
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL: string) => {
-          console.log('File available at', downloadURL);
+          this.progressoService.state = `File available at ${downloadURL}`;
         });
       }
     );
