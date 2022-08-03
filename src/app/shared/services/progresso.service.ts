@@ -8,6 +8,7 @@ export class ProgressoService {
   public progresso: number = 0;
   public estado: string = '';
   public downloadURL: string = '';
+  public erro: string = '';
 
   constructor() { }
 }

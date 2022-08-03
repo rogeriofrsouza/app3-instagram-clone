@@ -30,6 +30,8 @@ export class DbService {
       }, 
       (error: StorageError) => {
         this.progressoService.estado = 'erro';
+        this.progressoService.erro = error.serverResponse !== null ? error.serverResponse : '';
+
         console.log(error);
       }, 
       () => {

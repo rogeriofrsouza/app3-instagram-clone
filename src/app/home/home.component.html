@@ -3,7 +3,7 @@
     <div class="logo"></div>
 
     <div class="d-flex align-items-center gap-3">
-      <div class="add-post" data-bs-toggle="modal" data-bs-target="#incluirPublicacaoModal"></div>
+      <div class="add-post" data-bs-toggle="modal" data-bs-target="#incluirPublicacaoModal" (click)="incluirPublicacao()"></div>
       <a (click)="sair()">Sair</a>
     </div>
   </div>
@@ -14,6 +14,6 @@
     <app-publicacoes></app-publicacoes>
 
     <!-- Modal -->
-    <app-incluir-publicacao></app-incluir-publicacao>
+    <app-incluir-publicacao #incluirPublicacaoComponent></app-incluir-publicacao>
   </div>
 </div>

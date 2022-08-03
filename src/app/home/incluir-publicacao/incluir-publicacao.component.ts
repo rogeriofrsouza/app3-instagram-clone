@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Auth, getAuth, onAuthStateChanged } from 'firebase/auth';
 import { interval, Subject, takeUntil } from 'rxjs';
@@ -20,9 +20,10 @@ export class IncluirPublicacaoComponent implements OnInit {
   public email: string = '';
   private imagem: FileList | null = null;
 
-  public estadoPublicacao: string = 'pendente';
+  public estadoPublicacao: string = '';
   public progressoUpload: number = 0;
   public downloadURL: string = '';
+  public erro: string = '';
 
   constructor(private dbService: DbService, private progressoService: ProgressoService) { }
 
@@ -43,18 +44,22 @@ export class IncluirPublicacaoComponent implements OnInit {
       imagem: this.imagem?.item(0)
     });
 
-    const intervalo = interval(1000);
     const continua = new Subject<boolean>();
-    
     continua.next(true);
+
+    const intervalo = interval(500);
     const acompanhamentoUpload = intervalo.pipe(takeUntil(continua));
 
     acompanhamentoUpload.subscribe(() => {
       this.estadoPublicacao = this.progressoService.estado;
       this.progressoUpload = this.progressoService.progresso;
 
-      if (this.progressoService.estado === 'concluido') {
+      if (this.estadoPublicacao === 'concluido') {
         this.downloadURL = this.progressoService.downloadURL;
+        continua.next(false);
+        
+      } else if (this.estadoPublicacao === 'erro') {
+        this.erro = this.progressoService.erro;
         continua.next(false);
       }
     });

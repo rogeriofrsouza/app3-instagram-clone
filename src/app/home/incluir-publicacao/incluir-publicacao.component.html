@@ -7,7 +7,7 @@
       <div *ngSwitchCase="'pendente'">
         <form [formGroup]="formulario" (ngSubmit)="publicar()">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Criar uma publicação</h5>
+            <h5 class="modal-title" id="incluirPublicacaoModalLabel">Criar uma publicação</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
   
@@ -36,19 +36,31 @@
       <!-- Andamento -->
       <div *ngSwitchCase="'andamento'">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Publicação em andamento</h5>
+          <h5 class="modal-title" id="incluirPublicacaoModalLabel">Publicação em andamento</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
   
         <div class="modal-body">
-          Progresso: {{ progressoUpload }}%
+          <div class="progress">
+            <div 
+              class="progress-bar" 
+              role="progressbar" 
+              aria-label="Barra de progresso" 
+              [style.width]="progressoUpload + '%'" 
+              [attr.aria-valuenow]="progressoUpload" 
+              aria-valuemin="0" 
+              aria-valuemax="100"
+            >
+              {{ progressoUpload }}%
+            </div>
+          </div>
         </div>
       </div>
 
       <!-- Concluído -->
       <div *ngSwitchCase="'concluido'">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Publicação realizada com sucesso</h5>
+          <h5 class="modal-title" id="incluirPublicacaoModalLabel">Publicação realizada com sucesso</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
   
@@ -57,6 +69,19 @@
           <p>Arquivo disponível 
             <a [href]="downloadURL" target="_blank">aqui</a>.
           </p>
+        </div>
+      </div>
+
+      <!-- Erro -->
+      <div *ngSwitchCase="'erro'">
+        <div class="modal-header">
+          <h5 class="modal-title" id="incluirPublicacaoModalLabel">Erro</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+          <p>Erro na publicação, tente novamente!</p>
+          <p>{{ erro }}</p>
         </div>
       </div>
     </div>

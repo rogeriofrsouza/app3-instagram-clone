@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { AutenticacaoService } from './../shared/services/autenticacao.service';
+import { IncluirPublicacaoComponent } from './incluir-publicacao/incluir-publicacao.component';
 
 @Component({
   selector: 'app-home',
@@ -9,6 +10,8 @@ import { AutenticacaoService } from './../shared/services/autenticacao.service';
 })
 export class HomeComponent implements OnInit {
 
+  @ViewChild('incluirPublicacaoComponent') incluirPublicacaoComponent!: IncluirPublicacaoComponent;
+
   constructor(private autenticacaoService: AutenticacaoService) { }
 
   ngOnInit(): void {
@@ -16,6 +19,10 @@ export class HomeComponent implements OnInit {
 
   public sair(): void {
     this.autenticacaoService.sair();
+  }
+
+  public incluirPublicacao(): void {
+    this.incluirPublicacaoComponent.estadoPublicacao = 'pendente';
   }
 
 }
