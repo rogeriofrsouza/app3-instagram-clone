@@ -1,6 +1,6 @@
 import { Publicacao } from './../models/publicacao.model';
 import { Injectable } from '@angular/core';
-import { Database, DataSnapshot, get, getDatabase, push, ref as databaseRef } from 'firebase/database';
+import { Database, DatabaseReference, DataSnapshot, get, getDatabase, orderByKey, push, query, ref as databaseRef } from 'firebase/database';
 import { FirebaseStorage, getDownloadURL, getStorage, ref as storageRef, StorageError, uploadBytesResumable, UploadTask, UploadTaskSnapshot } from 'firebase/storage';
 
 import { ProgressoService } from './progresso.service';
@@ -48,35 +48,40 @@ export class DbService {
   }
 
   public consultaPublicacoes(emailUsuario: string): Promise<Publicacao[]> {
-    return new Promise((resolve, reject) => {    
+    return new Promise((resolve, reject) => {
       const db: Database = getDatabase();
-      
-      get(databaseRef(db, `publicacoes/${btoa(emailUsuario)}`))
+
+      get(query(databaseRef(db, `publicacoes/${btoa(emailUsuario)}`), orderByKey()))
         .then((snapshot: DataSnapshot) => {
+          let publicacoes: Publicacao[] = [];
   
-          if (snapshot.exists()) {
-            const storage: FirebaseStorage = getStorage();
-            let publicacoes: Publicacao[] = [];
-    
+          if (snapshot.exists()) {    
             snapshot.forEach((child: DataSnapshot) => {
               let publicacao: Publicacao = child.val();
-    
-              getDownloadURL(storageRef(storage, `imagens/${child.key}`))
-                .then((downloadURL: string) => {
-                  publicacao.urlImagem = downloadURL;
-                  
-                  get(databaseRef(db, `usuario_detalhe/${btoa(emailUsuario)}`))
-                    .then((snapshot: DataSnapshot) => {
-                      publicacao.nomeUsuario = snapshot.val().nome;
-                      publicacoes.push(publicacao);
-                    });
-                });
+              publicacao.key = child.key !== null ? child.key : '';
+              
+              publicacoes.push(publicacao);
             });
-            setTimeout(() => resolve(publicacoes), 1000);
-  
           } else {
             console.log('Nenhum dado disponível');
           }
+          return publicacoes.reverse();
+        })
+        .then((publicacoes: Publicacao[]) => {
+          const storage: FirebaseStorage = getStorage();
+
+          publicacoes.forEach((publicacao) => {
+            getDownloadURL(storageRef(storage, `imagens/${publicacao.key}`))
+              .then((downloadURL: string) => {
+                publicacao.urlImagem = downloadURL;
+                
+                get(databaseRef(db, `usuario_detalhe/${btoa(emailUsuario)}`))
+                  .then((snapshot: DataSnapshot) => {
+                    publicacao.nomeUsuario = snapshot.val().nome;
+                  });
+              });
+          });
+          setTimeout(() => resolve(publicacoes), 1000);
         })
         .catch(error => reject(error));
     });
