@@ -1,7 +1,9 @@
-import { ProgressoService } from './progresso.service';
+import { Publicacao } from './../models/publicacao.model';
 import { Injectable } from '@angular/core';
-import { Database, DatabaseReference, DataSnapshot, getDatabase, onValue, push, ref as databaseRef, ThenableReference } from 'firebase/database';
-import { FirebaseStorage, getDownloadURL, getStorage, ref as storageRef, StorageError, uploadBytesResumable, UploadTaskSnapshot } from 'firebase/storage';
+import { Database, DataSnapshot, get, getDatabase, push, ref as databaseRef } from 'firebase/database';
+import { FirebaseStorage, getDownloadURL, getStorage, ref as storageRef, StorageError, uploadBytesResumable, UploadTask, UploadTaskSnapshot } from 'firebase/storage';
+
+import { ProgressoService } from './progresso.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,15 +12,15 @@ export class DbService {
 
   constructor(private progressoService: ProgressoService) { }
 
-  public publicar(publicacao: any): void {
+  public publicar(titulo: string, emailUsuario: string, imagem: File): void {
     const db: Database = getDatabase();
-    push(databaseRef(db, `publicacoes/${btoa(publicacao.email)}`), { titulo: publicacao.titulo })
+    push(databaseRef(db, `publicacoes/${btoa(emailUsuario)}`), { titulo: titulo })
       .then((reference: any) => {
 
         let nomeImagem: string = reference.key;
         
         const storage: FirebaseStorage = getStorage();
-        const uploadTask = uploadBytesResumable(storageRef(storage, `imagens/${nomeImagem}`), publicacao.imagem);
+        const uploadTask: UploadTask = uploadBytesResumable(storageRef(storage, `imagens/${nomeImagem}`), imagem);
     
         uploadTask.on('state_changed', 
           (snapshot: UploadTaskSnapshot) => {
@@ -45,14 +47,39 @@ export class DbService {
       });
   }
 
-  public consultaPublicacoes(emailUsuario: string): any {
-    const db: Database = getDatabase();
-    const publicacoesRef: DatabaseReference = databaseRef(db, `publicacoes/${btoa(emailUsuario)}`);
+  public consultaPublicacoes(emailUsuario: string): Promise<Publicacao[]> {
+    return new Promise((resolve, reject) => {    
+      const db: Database = getDatabase();
+      
+      get(databaseRef(db, `publicacoes/${btoa(emailUsuario)}`))
+        .then((snapshot: DataSnapshot) => {
+  
+          if (snapshot.exists()) {
+            const storage: FirebaseStorage = getStorage();
+            let publicacoes: Publicacao[] = [];
     
-    onValue(publicacoesRef, (snapshot: DataSnapshot) => {
-      console.log(snapshot);
-      console.log(snapshot.val());
-    })
+            snapshot.forEach((child: DataSnapshot) => {
+              let publicacao: Publicacao = child.val();
+    
+              getDownloadURL(storageRef(storage, `imagens/${child.key}`))
+                .then((downloadURL: string) => {
+                  publicacao.urlImagem = downloadURL;
+                  
+                  get(databaseRef(db, `usuario_detalhe/${btoa(emailUsuario)}`))
+                    .then((snapshot: DataSnapshot) => {
+                      publicacao.nomeUsuario = snapshot.val().nome;
+                      publicacoes.push(publicacao);
+                    });
+                  });
+            });
+            setTimeout(() => resolve(publicacoes), 1000);
+  
+          } else {
+            console.log('Nenhum dado disponível');
+          }
+        })
+        .catch(error => reject(error));
+    });
   }
 
 }

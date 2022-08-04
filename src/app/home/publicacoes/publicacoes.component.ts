@@ -1,6 +1,7 @@
-import { onAuthStateChanged, getAuth, Auth, User } from 'firebase/auth';
 import { Component, OnInit } from '@angular/core';
+import { Auth, getAuth, onAuthStateChanged } from 'firebase/auth';
 
+import { Publicacao } from './../../shared/models/publicacao.model';
 import { DbService } from './../../shared/services/db.service';
 
 @Component({
@@ -11,6 +12,7 @@ import { DbService } from './../../shared/services/db.service';
 export class PublicacoesComponent implements OnInit {
 
   public email: string = '';
+  public publicacoes: Publicacao[] = [];
 
   constructor(private dbService: DbService) { }
 
@@ -27,7 +29,12 @@ export class PublicacoesComponent implements OnInit {
   }
 
   public atualizarTimeline(): void {
-    this.dbService.consultaPublicacoes(this.email);
+    this.dbService.consultaPublicacoes(this.email)
+      .then((publicacoes: Publicacao[]) => {
+        console.log(publicacoes);
+        this.publicacoes = publicacoes;
+      })
+      .catch((error: Error) => console.log(error));
   }
 
 }

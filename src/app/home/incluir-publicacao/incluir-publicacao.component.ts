@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Auth, getAuth, onAuthStateChanged } from 'firebase/auth';
 import { interval, Subject, takeUntil } from 'rxjs';
@@ -18,7 +18,7 @@ export class IncluirPublicacaoComponent implements OnInit {
   })
 
   public email: string = '';
-  private imagem: FileList | null = null;
+  public imagem!: File;
 
   public estadoPublicacao: string = '';
   public progressoUpload: number = 0;
@@ -38,11 +38,7 @@ export class IncluirPublicacaoComponent implements OnInit {
   }
 
   public publicar(): void {
-    this.dbService.publicar({
-      email: this.email,
-      titulo: this.formulario.value.titulo,
-      imagem: this.imagem?.item(0)
-    });
+    this.dbService.publicar(this.formulario.value.titulo, this.email, this.imagem);
 
     const continua = new Subject<boolean>();
     continua.next(true);
@@ -66,7 +62,8 @@ export class IncluirPublicacaoComponent implements OnInit {
   }
 
   public preparaImagemUpload(event: Event): void {
-    this.imagem = (<HTMLInputElement>event.target).files;
+    let item: File | null = (<HTMLInputElement>event.target).files!.item(0);
+    item !== null ? this.imagem = item : null;
   }
 
 }
