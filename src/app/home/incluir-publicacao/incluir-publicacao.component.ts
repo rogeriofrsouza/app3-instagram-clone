@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Auth, getAuth, onAuthStateChanged } from 'firebase/auth';
 import { interval, Subject, takeUntil } from 'rxjs';
@@ -12,6 +12,8 @@ import { ProgressoService } from './../../shared/services/progresso.service';
   styleUrls: ['./incluir-publicacao.component.css']
 })
 export class IncluirPublicacaoComponent implements OnInit {
+
+  @Output() public atualizarTimeline: EventEmitter<any> = new EventEmitter();
 
   public formulario: FormGroup = new FormGroup({
     'titulo': new FormControl(null, [ Validators.required ])
@@ -53,6 +55,7 @@ export class IncluirPublicacaoComponent implements OnInit {
       if (this.estadoPublicacao === 'concluido') {
         this.downloadURL = this.progressoService.downloadURL;
         continua.next(false);
+        this.atualizarTimeline.emit();
         
       } else if (this.estadoPublicacao === 'erro') {
         this.erro = this.progressoService.erro;

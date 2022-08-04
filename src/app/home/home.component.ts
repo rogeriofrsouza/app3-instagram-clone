@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { AutenticacaoService } from './../shared/services/autenticacao.service';
 import { IncluirPublicacaoComponent } from './incluir-publicacao/incluir-publicacao.component';
+import { PublicacoesComponent } from './publicacoes/publicacoes.component';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +11,8 @@ import { IncluirPublicacaoComponent } from './incluir-publicacao/incluir-publica
 })
 export class HomeComponent implements OnInit {
 
-  @ViewChild('incluirPublicacaoComponent') incluirPublicacaoComponent!: IncluirPublicacaoComponent;
+  @ViewChild('incluirPublicacaoComponent') public incluirPublicacaoComponent!: IncluirPublicacaoComponent;
+  @ViewChild('publicacoesComponent') public publicacoesComponent!: PublicacoesComponent;
 
   constructor(private autenticacaoService: AutenticacaoService) { }
 
@@ -23,6 +25,10 @@ export class HomeComponent implements OnInit {
 
   public incluirPublicacao(): void {
     this.incluirPublicacaoComponent.estadoPublicacao = 'pendente';
+  }
+
+  public atualizarTimeline(): void {
+    this.publicacoesComponent.atualizarTimeline();
   }
 
 }

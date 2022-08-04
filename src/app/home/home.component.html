@@ -11,9 +11,9 @@
 
 <div class="bg-padrao">
   <div class="container mt-5">
-    <app-publicacoes></app-publicacoes>
+    <app-publicacoes #publicacoesComponent></app-publicacoes>
 
     <!-- Modal -->
-    <app-incluir-publicacao #incluirPublicacaoComponent></app-incluir-publicacao>
+    <app-incluir-publicacao #incluirPublicacaoComponent (atualizarTimeline)="atualizarTimeline()"></app-incluir-publicacao>
   </div>
 </div>

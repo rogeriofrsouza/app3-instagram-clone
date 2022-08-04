@@ -70,7 +70,7 @@ export class DbService {
                       publicacao.nomeUsuario = snapshot.val().nome;
                       publicacoes.push(publicacao);
                     });
-                  });
+                });
             });
             setTimeout(() => resolve(publicacoes), 1000);
   
