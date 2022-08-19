@@ -33,8 +33,10 @@ export class CadastroComponent implements OnInit {
       
     } else {
       let usuario: Usuario = this.formulario.value;
+
       this.autenticacaoService.cadastrarUsuario(usuario)
-        .then((error) => error !== undefined ? this.errorMessage = error.message : this.exibirPainelLogin());
+        .then(() => this.exibirPainelLogin())
+        .catch((error: Error) => this.errorMessage = error.message);
     }
   }
 

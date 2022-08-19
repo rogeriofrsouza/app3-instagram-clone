@@ -8,8 +8,8 @@ import { Component, OnInit } from '@angular/core';
   animations: [
     trigger('animacao-banner', [
       transition(':enter', [ 
-        style({ opacity: 0, transform: 'translate(-32px, 0)' }), //Estilo do estado inicial 'void'
-        animate('500ms 0s ease-in-out', style({ opacity: 1, transform: 'translate(0, 0)' })) //Estilo do elemento ao entrar no DOM
+        style({ opacity: 0, transform: 'translate(-32px, 0)' }), // Estilo do estado inicial 'void'
+        animate('500ms 0s ease-in-out', style({ opacity: 1, transform: 'translate(0, 0)' })) // Estilo do elemento ao entrar no DOM
       ])
     ]),
     trigger('animacao-painel', [

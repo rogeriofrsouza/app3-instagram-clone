@@ -14,7 +14,7 @@ export class AutenticacaoService {
 
   constructor(private router: Router) { }
 
-  //Cadastrar usuário
+  // Cadastrar usuário
   public cadastrarUsuario(usuario: Usuario): Promise<any> {
     const auth: Auth = getAuth();
     
@@ -25,14 +25,10 @@ export class AutenticacaoService {
 
         const db: Database = getDatabase();
         set(ref(db, `usuario_detalhe/${btoa(usuario.email)}`), usuario);
-      })
-      .catch((error: Error) => {
-        console.log(error);
-        return error;
       });
   }
 
-  //Autenticar usuário
+  // Autenticar usuário
   public autenticarUsuario(email: string, senha: string): Promise<any> {
     const auth: Auth = getAuth();
 
@@ -45,25 +41,21 @@ export class AutenticacaoService {
             localStorage.setItem('idToken', idToken);
             this.idToken = idToken;
             this.router.navigateByUrl('/home');
-          })
-      })
-      .catch((error: Error) => {
-        console.log(error);
-        return error;
+          });
       });
   }
 
-  //Usuário autenticado
+  // Usuário autenticado
   public autenticado(): boolean {
     if (this.idToken === '') {
       let token: string | null = localStorage.getItem('idToken');
       
-      token !== null ? this.idToken = token : this.router.navigateByUrl('');
+      token === null ? this.router.navigateByUrl('') : this.idToken = token;
     }
     return this.idToken !== '';
   }
 
-  //SignOut
+  // SignOut
   public sair(): void {
     const auth: Auth = getAuth();
     

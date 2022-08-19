@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="incluirPublicacaoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="incluirPublicacaoModal" tabindex="-1" aria-labelledby="incluirPublicacaoModal" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content" [ngSwitch]="estadoPublicacao">
       
@@ -7,7 +7,7 @@
       <div *ngSwitchCase="'pendente'">
         <form [formGroup]="formulario" (ngSubmit)="publicar()">
           <div class="modal-header">
-            <h5 class="modal-title" id="incluirPublicacaoModalLabel">Criar uma publicação</h5>
+            <h5 class="modal-title">Criar uma publicação</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
   
@@ -36,7 +36,7 @@
       <!-- Andamento -->
       <div *ngSwitchCase="'andamento'">
         <div class="modal-header">
-          <h5 class="modal-title" id="incluirPublicacaoModalLabel">Publicação em andamento</h5>
+          <h5 class="modal-title">Publicação em andamento</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
   
@@ -60,22 +60,20 @@
       <!-- Concluído -->
       <div *ngSwitchCase="'concluido'">
         <div class="modal-header">
-          <h5 class="modal-title" id="incluirPublicacaoModalLabel">Publicação realizada com sucesso</h5>
+          <h5 class="modal-title">Publicação realizada com sucesso</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
   
         <div class="modal-body">
           <p>Publicação realizada com sucesso!</p>
-          <p>Arquivo disponível 
-            <a [href]="downloadURL" target="_blank">aqui</a>.
-          </p>
+          <p>Arquivo disponível <a [href]="downloadURL" target="_blank">aqui</a></p>
         </div>
       </div>
 
       <!-- Erro -->
       <div *ngSwitchCase="'erro'">
         <div class="modal-header">
-          <h5 class="modal-title" id="incluirPublicacaoModalLabel">Erro</h5>
+          <h5 class="modal-title">Erro</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 

@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Auth, getAuth, onAuthStateChanged } from 'firebase/auth';
+import { Auth, getAuth, onAuthStateChanged, User } from 'firebase/auth';
 import { interval, Subject, takeUntil } from 'rxjs';
 
 import { DbService } from './../../shared/services/db.service';
@@ -16,10 +16,10 @@ export class IncluirPublicacaoComponent implements OnInit {
   @Output() public atualizarTimeline: EventEmitter<any> = new EventEmitter();
 
   public formulario: FormGroup = new FormGroup({
-    'titulo': new FormControl(null, [ Validators.required ])
-  })
+    'titulo': new FormControl(null, [ Validators.required, Validators.minLength(6) ])
+  });
 
-  public email: string = '';
+  public emailUsuario: string = '';
   public imagem!: File;
 
   public estadoPublicacao: string = '';
@@ -32,15 +32,15 @@ export class IncluirPublicacaoComponent implements OnInit {
   ngOnInit(): void {
     const auth: Auth = getAuth();
 
-    onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, (user: User | null) => {
       if (user) {
-        this.email = user.email !== null ? user.email : '';
+        this.emailUsuario = user.email !== null ? user.email : '';
       }
     });
   }
 
   public publicar(): void {
-    this.dbService.publicar(this.formulario.value.titulo, this.email, this.imagem);
+    this.dbService.publicar(this.formulario.value.titulo, this.emailUsuario, this.imagem);
 
     const continua = new Subject<boolean>();
     continua.next(true);
@@ -65,8 +65,7 @@ export class IncluirPublicacaoComponent implements OnInit {
   }
 
   public preparaImagemUpload(event: Event): void {
-    let item: File | null = (<HTMLInputElement>event.target).files!.item(0);
-    item !== null ? this.imagem = item : null;
+    this.imagem = (<HTMLInputElement>event.target).files![0];
   }
 
 }

@@ -1,6 +1,6 @@
 import { Publicacao } from './../models/publicacao.model';
 import { Injectable } from '@angular/core';
-import { Database, DatabaseReference, DataSnapshot, get, getDatabase, orderByKey, push, query, ref as databaseRef } from 'firebase/database';
+import { Database, DataSnapshot, get, getDatabase, orderByKey, push, query, ref as databaseRef } from 'firebase/database';
 import { FirebaseStorage, getDownloadURL, getStorage, ref as storageRef, StorageError, uploadBytesResumable, UploadTask, UploadTaskSnapshot } from 'firebase/storage';
 
 import { ProgressoService } from './progresso.service';
@@ -14,6 +14,7 @@ export class DbService {
 
   public publicar(titulo: string, emailUsuario: string, imagem: File): void {
     const db: Database = getDatabase();
+    
     push(databaseRef(db, `publicacoes/${btoa(emailUsuario)}`), { titulo: titulo })
       .then((reference: any) => {
 
@@ -70,7 +71,7 @@ export class DbService {
         .then((publicacoes: Publicacao[]) => {
           const storage: FirebaseStorage = getStorage();
 
-          publicacoes.forEach((publicacao) => {
+          publicacoes.forEach(publicacao => {
             getDownloadURL(storageRef(storage, `imagens/${publicacao.key}`))
               .then((downloadURL: string) => {
                 publicacao.urlImagem = downloadURL;

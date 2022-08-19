@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { AutenticacaoService } from './../../shared/services/autenticacao.service';
 
@@ -19,20 +20,16 @@ export class LoginComponent implements OnInit {
 
   public errorMessage: string = '';
 
-  constructor(private autenticacaoService: AutenticacaoService) { }
+  constructor(private autenticacaoService: AutenticacaoService, private router: Router) { }
 
   ngOnInit(): void {
+    this.autenticacaoService.autenticado() ? this.router.navigateByUrl('/home') : null;
   }
 
   public autenticarUsuario(): void {
-    if (this.formulario.status === 'INVALID') {
-      this.formulario.markAllAsTouched();
-    
-    } else {
-      this.autenticacaoService.autenticarUsuario(this.formulario.value.email, this.formulario.value.senha)
-        .then(error => this.errorMessage = error !== undefined ? error.message : '');
-    }
-
+    this.autenticacaoService.autenticarUsuario(this.formulario.value.email, this.formulario.value.senha)
+      .then(() => this.router.navigateByUrl('/home'))
+      .catch((error: Error) => this.errorMessage = error.message);
   }
 
   public exibirPainelCadastro(): void {
