@@ -11,8 +11,8 @@ import { PublicacoesComponent } from './publicacoes/publicacoes.component';
 })
 export class HomeComponent implements OnInit {
 
-  @ViewChild('incluirPublicacaoComponent') public incluirPublicacaoComponent!: IncluirPublicacaoComponent;
   @ViewChild('publicacoesComponent') public publicacoesComponent!: PublicacoesComponent;
+  @ViewChild('incluirPublicacaoComponent') public incluirPublicacaoComponent!: IncluirPublicacaoComponent;
 
   constructor(private autenticacaoService: AutenticacaoService) { }
 

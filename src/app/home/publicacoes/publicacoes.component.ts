@@ -30,10 +30,7 @@ export class PublicacoesComponent implements OnInit {
 
   public atualizarTimeline(): void {
     this.dbService.consultaPublicacoes(this.email)
-      .then((publicacoes: Publicacao[]) => {
-        console.log(publicacoes);
-        this.publicacoes = publicacoes;
-      })
+      .then((publicacoes: Publicacao[]) => this.publicacoes = publicacoes)
       .catch((error: Error) => console.log(error));
   }
 

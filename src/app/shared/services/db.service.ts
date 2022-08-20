@@ -35,8 +35,6 @@ export class DbService {
           (error: StorageError) => {
             this.progressoService.estado = 'erro';
             this.progressoService.erro = error.serverResponse !== null ? error.serverResponse : '';
-    
-            console.log(error);
           }, 
           () => {
             getDownloadURL(uploadTask.snapshot.ref).then((downloadURL: string) => {
@@ -45,7 +43,8 @@ export class DbService {
             });
           }
         );
-      });
+      })
+      .catch((error: Error) => console.log(error));
   }
 
   public consultaPublicacoes(emailUsuario: string): Promise<Publicacao[]> {
@@ -59,8 +58,8 @@ export class DbService {
           if (snapshot.exists()) {    
             snapshot.forEach((child: DataSnapshot) => {
               let publicacao: Publicacao = child.val();
-              publicacao.key = child.key !== null ? child.key : '';
-              
+
+              publicacao.key = child.key !== null ? child.key : '';              
               publicacoes.push(publicacao);
             });
           } else {
@@ -71,20 +70,18 @@ export class DbService {
         .then((publicacoes: Publicacao[]) => {
           const storage: FirebaseStorage = getStorage();
 
-          publicacoes.forEach(publicacao => {
+          publicacoes.forEach((publicacao: Publicacao) => {
             getDownloadURL(storageRef(storage, `imagens/${publicacao.key}`))
               .then((downloadURL: string) => {
                 publicacao.urlImagem = downloadURL;
                 
                 get(databaseRef(db, `usuario_detalhe/${btoa(emailUsuario)}`))
-                  .then((snapshot: DataSnapshot) => {
-                    publicacao.nomeUsuario = snapshot.val().nome;
-                  });
+                  .then((snapshot: DataSnapshot) => publicacao.nomeUsuario = snapshot.val().nome);
               });
           });
-          setTimeout(() => resolve(publicacoes), 1000);
+          resolve(publicacoes);
         })
-        .catch(error => reject(error));
+        .catch((error: Error) => reject(error));
     });
   }
 

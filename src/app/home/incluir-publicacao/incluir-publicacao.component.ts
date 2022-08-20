@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Auth, getAuth, onAuthStateChanged, User } from 'firebase/auth';
-import { interval, Subject, takeUntil } from 'rxjs';
+import { interval, Observable, Subject, takeUntil } from 'rxjs';
 
 import { DbService } from './../../shared/services/db.service';
 import { ProgressoService } from './../../shared/services/progresso.service';
@@ -42,11 +42,11 @@ export class IncluirPublicacaoComponent implements OnInit {
   public publicar(): void {
     this.dbService.publicar(this.formulario.value.titulo, this.emailUsuario, this.imagem);
 
-    const continua = new Subject<boolean>();
+    const continua: Subject<boolean> = new Subject();
     continua.next(true);
 
-    const intervalo = interval(500);
-    const acompanhamentoUpload = intervalo.pipe(takeUntil(continua));
+    const intervalo: Observable<number> = interval(500);
+    const acompanhamentoUpload: Observable<number> = intervalo.pipe(takeUntil(continua));
 
     acompanhamentoUpload.subscribe(() => {
       this.estadoPublicacao = this.progressoService.estado;
