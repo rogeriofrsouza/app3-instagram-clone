@@ -18,3 +18,7 @@
   height: 32px;
   float: left;
 }
+
+.logo, .add-post {
+  cursor: pointer;
+}
