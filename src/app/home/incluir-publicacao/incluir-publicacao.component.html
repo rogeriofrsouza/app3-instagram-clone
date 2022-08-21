@@ -3,16 +3,17 @@
   <div class="modal-dialog">
     <div class="modal-content" [ngSwitch]="estadoPublicacao">
       
-      <!-- Pendente -->
-      <div *ngSwitchCase="'pendente'">
-        <form [formGroup]="formulario" (ngSubmit)="publicar()">
-          <div class="modal-header">
-            <h5 class="modal-title">Criar uma publicação</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-  
-          <div class="modal-body">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ tituloModal }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Pendente -->
+        <div *ngSwitchCase="'pendente'">
+          <form [formGroup]="formulario" (ngSubmit)="publicar()">
             <input 
+              #inputImagem
               type="file" 
               class="form-control" 
               accept="image/*" 
@@ -24,23 +25,16 @@
               class="form-control mt-3"
               formControlName="titulo" 
             />
-          </div>
-          
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-            <button type="submit" class="btn btn-primary">Publicar</button>
-          </div>
-        </form>
-      </div>
-
-      <!-- Andamento -->
-      <div *ngSwitchCase="'andamento'">
-        <div class="modal-header">
-          <h5 class="modal-title">Publicação em andamento</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary" [disabled]="formulario.status === 'INVALID'">Publicar</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            </div>
+          </form>
         </div>
-  
-        <div class="modal-body">
+
+        <!-- Andamento -->
+        <div *ngSwitchCase="'andamento'">
           <div class="progress">
             <div 
               class="progress-bar" 
@@ -55,29 +49,15 @@
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- Concluído -->
-      <div *ngSwitchCase="'concluido'">
-        <div class="modal-header">
-          <h5 class="modal-title">Publicação realizada com sucesso</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-  
-        <div class="modal-body">
+        <!-- Concluído -->
+        <div *ngSwitchCase="'concluido'">
           <p>Publicação realizada com sucesso!</p>
           <p>Arquivo disponível <a [href]="downloadURL" target="_blank">aqui</a></p>
         </div>
-      </div>
 
-      <!-- Erro -->
-      <div *ngSwitchCase="'erro'">
-        <div class="modal-header">
-          <h5 class="modal-title">Erro</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-
-        <div class="modal-body">
+        <!-- Erro -->
+        <div *ngSwitchCase="'erro'">
           <p>Erro na publicação, tente novamente!</p>
           <p>{{ erro }}</p>
         </div>

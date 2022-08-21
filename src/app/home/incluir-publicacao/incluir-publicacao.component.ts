@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Auth, getAuth, onAuthStateChanged, User } from 'firebase/auth';
 import { interval, Observable, Subject, takeUntil } from 'rxjs';
@@ -14,13 +14,16 @@ import { ProgressoService } from './../../shared/services/progresso.service';
 export class IncluirPublicacaoComponent implements OnInit {
 
   @Output() public atualizarTimeline: EventEmitter<any> = new EventEmitter();
+  @ViewChild('inputImagem') public inputImagem!: ElementRef;
 
   public formulario: FormGroup = new FormGroup({
-    'titulo': new FormControl(null, [ Validators.required, Validators.minLength(6) ])
+    'titulo': new FormControl(null, [ Validators.required, Validators.minLength(6) ]),
+    'imagem': new FormControl(null, [ Validators.required ])
   });
 
   public emailUsuario: string = '';
   public imagem!: File;
+  public tituloModal: string = '';
 
   public estadoPublicacao: string = '';
   public progressoUpload: number = 0;
@@ -52,20 +55,29 @@ export class IncluirPublicacaoComponent implements OnInit {
       this.estadoPublicacao = this.progressoService.estado;
       this.progressoUpload = this.progressoService.progresso;
 
-      if (this.estadoPublicacao === 'concluido') {
-        this.downloadURL = this.progressoService.downloadURL;
-        continua.next(false);
-        this.atualizarTimeline.emit();
-        
-      } else if (this.estadoPublicacao === 'erro') {
-        this.erro = this.progressoService.erro;
-        continua.next(false);
+      switch (this.estadoPublicacao) {
+        case 'andamento': 
+          this.tituloModal = 'Publicação em andamento';
+          break;
+
+        case 'concluido': 
+          this.tituloModal = 'Publicação realizada com sucesso';
+          this.downloadURL = this.progressoService.downloadURL;
+          continua.next(false);
+          this.atualizarTimeline.emit();
+          break;
+
+        case 'erro':
+          this.tituloModal = 'Erro na publicação';
+          this.erro = this.progressoService.erro;
+          continua.next(false);
       }
     });
   }
 
   public preparaImagemUpload(event: Event): void {
     this.imagem = (<HTMLInputElement>event.target).files![0];
+    this.formulario.patchValue({ 'imagem': this.imagem });
   }
 
 }

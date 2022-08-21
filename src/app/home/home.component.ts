@@ -25,6 +25,14 @@ export class HomeComponent implements OnInit {
 
   public incluirPublicacao(): void {
     this.incluirPublicacaoComponent.estadoPublicacao = 'pendente';
+    this.incluirPublicacaoComponent.tituloModal = 'Criar uma publicação';
+
+    let inputImagem = this.incluirPublicacaoComponent.inputImagem;
+    inputImagem !== undefined ? inputImagem.nativeElement.value = '' : null;
+
+    let formulario = this.incluirPublicacaoComponent.formulario;
+    formulario.setValue({ 'titulo': null, 'imagem': null });
+    formulario.get('titulo')?.markAsUntouched();
   }
 
   public atualizarTimeline(): void {
