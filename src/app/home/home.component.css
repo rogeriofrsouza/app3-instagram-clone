@@ -1,24 +1,30 @@
 .navbar {
-  height: 77px;
+  height: 60px;
   /*padding: 26px 40px;*/
   width: 100%;
   border-bottom: solid 1px #E6E6E6;
 }
 
+.container {
+  max-width: 970px;
+}
+
 .logo {
-  background-image: url('/assets/logo-instagram-2.png');
-  width: 110px;
-  height: 36px;
+  width: 116px;
+  height: 34px;
+  margin-top: 7px;
   float: left;
 }
 
-.add-post {
-  background-image: url('/assets/camera.png');
-  width: 32px;
-  height: 32px;
-  float: left;
+.icon {
+  margin-right: 22px;
 }
 
-.logo, .add-post {
+.profile {
+  height: 26px;
+  width: auto;
+}
+
+.logo, .profile {
   cursor: pointer;
 }

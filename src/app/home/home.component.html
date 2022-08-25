@@ -1,16 +1,28 @@
 <nav class="navbar fixed-top navbar-light bg-white">
   <div class="container">
-    <div class="logo" routerLink="/home"></div>
+    <a routerLink="/home">
+      <img class="logo" src="../../assets/logo-instagram.png" alt="">
+    </a>
 
-    <div class="d-flex align-items-center gap-5">
-      <div class="add-post" data-bs-toggle="modal" data-bs-target="#incluirPublicacaoModal" (click)="incluirPublicacao()"></div>
-      <a (click)="sair()">Sair</a>
+    <div class="d-flex align-items-center" style="height: 24px;">
+      <a routerLink="">
+        <img class="icon" src="../../assets/icons/home.png" alt="Instagram icons created by pictranoosa - Flaticon https://www.flaticon.com/free-icons/instagram" />
+      </a>
+
+      <a data-bs-toggle="modal" data-bs-target="#incluirPublicacaoModal" (click)="incluirPublicacao()">
+        <img class="icon" src="../../assets/icons/more.png" alt="Add icons created by reussy - Flaticon https://www.flaticon.com/free-icons/add" />
+      </a>
+
+      <div>
+        <img class="profile" src="../../assets/imgs/female_avatar.svg" alt="">
+      </div>
+      <a style="display: none;" (click)="sair()">Sair</a>
     </div>
   </div>
 </nav>
 
 <div class="bg-padrao">
-  <div class="container mt-5">
+  <div class="container mt-4">
     <app-publicacoes #publicacoesComponent></app-publicacoes>
 
     <!-- Modal -->

@@ -1,7 +1,7 @@
 <div class="row" *ngFor="let publicacao of publicacoes">
   <div class="col d-flex justify-content-center">
     <div class="card">
-      <div class="card-body">
+      <div class="p-12">
         <p class="card-text"><strong>{{ publicacao.nomeUsuario }}</strong></p>
       </div>
 
@@ -9,8 +9,18 @@
         <img class="card-img" [src]="publicacao.urlImagem" />
       </div>
       
-      <div class="card-body">
-        <p class="card-text">
+      <div class="card-body p-12">
+        <div class="d-flex justify-content-between">
+          <div class="d-flex align-items-center gap-3">
+            <img class="icon" src="../../../assets/icons/heart.png" alt="Heart icons created by Freepik - Flaticon https://www.flaticon.com/free-icons/heart" />
+            <img class="icon" src="../../../assets/icons/chat.png" alt="Instagram comment icons created by pictranoosa - Flaticon https://www.flaticon.com/free-icons/instagram-comment" />
+            <img class="icon" src="../../../assets/icons/send.png" alt="Instagram share icons created by Freepik - Flaticon https://www.flaticon.com/free-icons/instagram-share" />
+          </div>
+          
+          <img class="icon" src="../../../assets/icons/save.png" alt="Save icons created by Freepik - Flaticon https://www.flaticon.com/free-icons/save" />
+        </div>
+
+        <p class="card-text mt-3">
           <strong>{{ publicacao.nomeUsuario }}</strong> {{ publicacao.titulo }}
         </p>
 

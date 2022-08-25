@@ -45,3 +45,12 @@ input.ng-invalid.ng-touched {
 .icon-check-circle {
   color: #198754;
 }
+
+.icon {
+  width: 24px;
+  cursor: pointer;
+}
+
+.p-12 {
+  padding: 12px !important;
+}
