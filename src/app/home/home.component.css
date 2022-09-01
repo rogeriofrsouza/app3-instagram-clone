@@ -20,11 +20,6 @@
   margin-right: 22px;
 }
 
-.profile {
-  height: 26px;
-  width: auto;
-}
-
 .logo, .profile {
   cursor: pointer;
 }
