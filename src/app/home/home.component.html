@@ -1,20 +1,22 @@
 <nav class="navbar fixed-top navbar-light bg-white">
   <div class="container">
+    <!-- Logo -->
     <a routerLink="/home">
-      <img class="logo" src="../../assets/logo-instagram.svg" alt="Logo Instagram" />
+      <img class="logo" src="../../assets/logo-instagram.png" alt="Logo Instagram" />
     </a>
 
+    <!-- Menu -->
     <div class="d-flex align-items-center" style="height: 24px;">
-      <a routerLink="">
-        <img class="icon" src="../../assets/icons/home.svg" alt="Home icon" />
+      <a class="icon" routerLink="/home">
+        <img src="../../assets/icons/home{{ iconFill[0] }}.svg" alt="Home icon" />
       </a>
 
-      <a data-bs-toggle="modal" data-bs-target="#incluirPublicacaoModal" (click)="incluirPublicacao()">
-        <img class="icon" src="../../assets/icons/add.svg" alt="Nova publicação icon" />
+      <a class="icon" data-bs-toggle="modal" data-bs-target="#incluirPublicacaoModal" (click)="incluirPublicacao()">
+        <img src="../../assets/icons/add{{ iconFill[1] }}.svg" alt="Nova publicação icon" />
       </a>
 
-      <div>
-        <img class="icon m-0" src="../../assets/icons/user.svg" alt="Perfil do usuário icon" />
+      <div class="icon m-0">
+        <img src="../../assets/icons/user{{ iconFill[2] }}.svg" alt="Perfil do usuário icon" />
       </div>
       <a style="display: none;" (click)="sair()">Sair</a>
     </div>

@@ -14,6 +14,8 @@ export class HomeComponent implements OnInit {
   @ViewChild('publicacoesComponent') public publicacoesComponent!: PublicacoesComponent;
   @ViewChild('incluirPublicacaoComponent') public incluirPublicacaoComponent!: IncluirPublicacaoComponent;
 
+  public iconFill: string[] = ['-fill', '', ''];
+
   constructor(private autenticacaoService: AutenticacaoService) { }
 
   ngOnInit(): void {
@@ -24,6 +26,8 @@ export class HomeComponent implements OnInit {
   }
 
   public incluirPublicacao(): void {
+    this.atualizarIcon('add');
+
     this.incluirPublicacaoComponent.estadoPublicacao = 'pendente';
     this.incluirPublicacaoComponent.tituloModal = 'Criar uma publicação';
 
@@ -37,6 +41,14 @@ export class HomeComponent implements OnInit {
 
   public atualizarTimeline(): void {
     this.publicacoesComponent.atualizarTimeline();
+  }
+
+  public atualizarIcon(icon: string): void {
+    switch (icon) {
+      case 'home': this.iconFill = ['-fill', '', '']; break;
+      case 'add': this.iconFill = ['', '-fill', '']; break;
+      case 'user': this.iconFill = ['', '', '-fill']; break;
+    }
   }
 
 }

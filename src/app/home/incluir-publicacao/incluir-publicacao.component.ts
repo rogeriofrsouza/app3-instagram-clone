@@ -71,6 +71,7 @@ export class IncluirPublicacaoComponent implements OnInit {
           this.tituloModal = 'Erro na publicação';
           this.erro = this.progressoService.erro;
           continua.next(false);
+          break;
       }
     });
   }
