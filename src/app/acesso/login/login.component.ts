@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AutenticacaoService } from './../../shared/services/autenticacao.service';
@@ -13,9 +13,9 @@ export class LoginComponent implements OnInit {
 
   @Output() public exibirPainel: EventEmitter<string> = new EventEmitter<string>();
 
-  public formulario: FormGroup = new FormGroup({
-    'email': new FormControl(null, [ Validators.required, Validators.minLength(6), Validators.email ]),
-    'senha': new FormControl(null, [ Validators.required, Validators.minLength(6) ])
+  public formulario: UntypedFormGroup = new UntypedFormGroup({
+    'email': new UntypedFormControl(null, [ Validators.required, Validators.minLength(6), Validators.email ]),
+    'senha': new UntypedFormControl(null, [ Validators.required, Validators.minLength(6) ])
   });
 
   public errorMessage: string = '';

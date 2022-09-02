@@ -1,5 +1,5 @@
-import { Component, OnInit, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Auth, getAuth, onAuthStateChanged, User } from 'firebase/auth';
 import { interval, Observable, Subject, takeUntil } from 'rxjs';
 
@@ -14,11 +14,13 @@ import { ProgressoService } from './../../shared/services/progresso.service';
 export class IncluirPublicacaoComponent implements OnInit {
 
   @Output() public atualizarTimeline: EventEmitter<any> = new EventEmitter();
+  @Output() public atualizarHomeIcon: EventEmitter<any> = new EventEmitter();
+
   @ViewChild('inputImagem') public inputImagem!: ElementRef;
 
-  public formulario: FormGroup = new FormGroup({
-    'titulo': new FormControl(null, [ Validators.required, Validators.minLength(6) ]),
-    'imagem': new FormControl(null, [ Validators.required ])
+  public formulario = new UntypedFormGroup({
+    titulo: new UntypedFormControl(null, [ Validators.required, Validators.minLength(6) ]),
+    imagem: new UntypedFormControl(null, [ Validators.required ])
   });
 
   public emailUsuario: string = '';
@@ -81,4 +83,12 @@ export class IncluirPublicacaoComponent implements OnInit {
     this.formulario.patchValue({ 'imagem': this.imagem });
   }
 
+  public atualizarIconMenu(): void {
+    this.atualizarHomeIcon.emit();
+  }
+
+  public fechouModal(event: any): void {
+    if (event.srcElement.id === 'incluirPublicacaoModal')
+      this.atualizarIconMenu();
+  }
 }

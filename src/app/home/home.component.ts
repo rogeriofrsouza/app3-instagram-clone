@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   @ViewChild('incluirPublicacaoComponent') public incluirPublicacaoComponent!: IncluirPublicacaoComponent;
 
   public iconFill: string[] = ['-fill', '', ''];
-
+  
   constructor(private autenticacaoService: AutenticacaoService) { }
 
   ngOnInit(): void {
@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
   public sair(): void {
     this.autenticacaoService.sair();
   }
-
+  
   public incluirPublicacao(): void {
     this.atualizarIcon('add');
 
@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
 
     let inputImagem = this.incluirPublicacaoComponent.inputImagem;
     inputImagem !== undefined ? inputImagem.nativeElement.value = '' : null;
-
+    
     let formulario = this.incluirPublicacaoComponent.formulario;
     formulario.setValue({ 'titulo': null, 'imagem': null });
     formulario.get('titulo')?.markAsUntouched();

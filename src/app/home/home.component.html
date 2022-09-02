@@ -7,7 +7,7 @@
 
     <!-- Menu -->
     <div class="d-flex align-items-center" style="height: 24px;">
-      <a class="icon" routerLink="/home">
+      <a class="icon" routerLink="/home" (click)="atualizarIcon('home')">
         <img src="../../assets/icons/home{{ iconFill[0] }}.svg" alt="Home icon" />
       </a>
 
@@ -15,9 +15,10 @@
         <img src="../../assets/icons/add{{ iconFill[1] }}.svg" alt="Nova publicação icon" />
       </a>
 
-      <div class="icon m-0">
+      <div class="icon m-0" (click)="atualizarIcon('user')">
         <img src="../../assets/icons/user{{ iconFill[2] }}.svg" alt="Perfil do usuário icon" />
       </div>
+      
       <a style="display: none;" (click)="sair()">Sair</a>
     </div>
   </div>
@@ -28,6 +29,11 @@
     <app-publicacoes #publicacoesComponent></app-publicacoes>
 
     <!-- Modal -->
-    <app-incluir-publicacao #incluirPublicacaoComponent (atualizarTimeline)="atualizarTimeline()"></app-incluir-publicacao>
+    <app-incluir-publicacao 
+      #incluirPublicacaoComponent 
+      (atualizarTimeline)="atualizarTimeline()" 
+      (atualizarHomeIcon)="atualizarIcon('home')"
+    >
+    </app-incluir-publicacao>
   </div>
 </div>

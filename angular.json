@@ -27,7 +27,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css", 
+              "src/styles.css",
               "./node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [
@@ -105,5 +105,7 @@
       }
     }
   },
-  "defaultProject": "app3-instagram-clone"
+  "cli": {
+    "analytics": "19610c10-33e1-4a03-9078-53c37cf2382b"
+  }
 }
