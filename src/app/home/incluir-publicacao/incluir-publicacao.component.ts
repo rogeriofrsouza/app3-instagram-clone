@@ -19,8 +19,8 @@ export class IncluirPublicacaoComponent implements OnInit {
   @ViewChild('inputImagem') public inputImagem!: ElementRef;
 
   public formulario = new UntypedFormGroup({
-    titulo: new UntypedFormControl(null, [ Validators.required, Validators.minLength(6) ]),
-    imagem: new UntypedFormControl(null, [ Validators.required ])
+    'titulo': new UntypedFormControl(null, [ Validators.required, Validators.minLength(6) ]),
+    'imagem': new UntypedFormControl(null, [ Validators.required ])
   });
 
   public emailUsuario: string = '';

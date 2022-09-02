@@ -18,6 +18,7 @@ import { AutenticacaoGuardService } from './shared/services/autenticacao-guard.s
 import { AutenticacaoService } from './shared/services/autenticacao.service';
 import { DbService } from './shared/services/db.service';
 import { ProgressoService } from './shared/services/progresso.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { ProgressoService } from './shared/services/progresso.service';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule
   ],
   providers: [
     AutenticacaoService,
