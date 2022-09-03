@@ -91,4 +91,5 @@ export class IncluirPublicacaoComponent implements OnInit {
     if (event.srcElement.id === 'incluirPublicacaoModal')
       this.atualizarIconMenu();
   }
+  
 }

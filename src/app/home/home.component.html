@@ -17,7 +17,7 @@
 
       <!-- Dropdown -->
       <div ngbDropdown (openChange)="openChange($event)" class="d-inline-block">
-        <div class="icon m-0" (click)="atualizarIcon('user')" ngbDropdownToggle>
+        <div class="icon m-0" ngbDropdownToggle>
           <img src="../../assets/icons/user{{ iconFill[2] }}.svg" alt="Perfil do usuário icon" />
         </div>
 
@@ -43,14 +43,16 @@
   </div>
 </nav>
 
+<!-- Publicações -->
 <div class="bg-padrao">
   <div class="container mt-4">
     <app-publicacoes #publicacoesComponent></app-publicacoes>
 
     <app-incluir-publicacao 
-        #incluirPublicacaoComponent 
-        (atualizarTimeline)="atualizarTimeline()" 
-        (atualizarHomeIcon)="atualizarIcon('home')">
+      #incluirPublicacaoComponent 
+      (atualizarTimeline)="atualizarTimeline()" 
+      (atualizarHomeIcon)="atualizarIcon('home')"
+    >
     </app-incluir-publicacao>
   </div>
 </div>

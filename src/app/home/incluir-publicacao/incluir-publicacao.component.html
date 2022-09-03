@@ -8,8 +8,8 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="atualizarIconMenu()" aria-label="Close"></button>
       </div>
 
-      <div [ngSwitch]="estadoPublicacao">
-        <div class="modal-body">
+      <div class="modal-body">
+        <div [ngSwitch]="estadoPublicacao">
           <!-- Pendente -->
           <div *ngSwitchCase="'pendente'">
             <form [formGroup]="formulario" (ngSubmit)="publicar()">
@@ -18,7 +18,7 @@
                 type="file" 
                 class="form-control" 
                 accept="image/*" 
-                (change)="preparaImagemUpload($event)"
+                (change)="preparaImagemUpload($event)" 
               />
               <input 
                 type="text" 

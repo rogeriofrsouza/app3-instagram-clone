@@ -14,8 +14,8 @@ export class LoginComponent implements OnInit {
   @Output() public exibirPainel: EventEmitter<string> = new EventEmitter<string>();
 
   public formulario: UntypedFormGroup = new UntypedFormGroup({
-    'email': new UntypedFormControl(null, [ Validators.required, Validators.minLength(6), Validators.email ]),
-    'senha': new UntypedFormControl(null, [ Validators.required, Validators.minLength(6) ])
+    email: new UntypedFormControl(null, [ Validators.required, Validators.minLength(6), Validators.email ]),
+    senha: new UntypedFormControl(null, [ Validators.required, Validators.minLength(6) ])
   });
 
   public errorMessage: string = '';

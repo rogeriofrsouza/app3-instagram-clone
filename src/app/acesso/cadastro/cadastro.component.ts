@@ -14,10 +14,10 @@ export class CadastroComponent implements OnInit {
   @Output() exibirPainel: EventEmitter<string> = new EventEmitter<string>();
 
   public formulario: UntypedFormGroup = new UntypedFormGroup({
-    'email': new UntypedFormControl(null, [ Validators.required, Validators.minLength(6), Validators.email ]),
-    'nome': new UntypedFormControl(null, [ Validators.required, Validators.minLength(6), Validators.maxLength(50) ]),
-    'usuario': new UntypedFormControl(null, [ Validators.required, Validators.minLength(6), Validators.maxLength(20) ]),
-    'senha': new UntypedFormControl(null, [ Validators.required, Validators.minLength(6) ])
+    email: new UntypedFormControl(null, [ Validators.required, Validators.minLength(6), Validators.email ]),
+    nome: new UntypedFormControl(null, [ Validators.required, Validators.minLength(6), Validators.maxLength(50) ]),
+    usuario: new UntypedFormControl(null, [ Validators.required, Validators.minLength(6), Validators.maxLength(20) ]),
+    senha: new UntypedFormControl(null, [ Validators.required, Validators.minLength(6) ])
   });
 
   public errorMessage: string = '';
@@ -28,10 +28,10 @@ export class CadastroComponent implements OnInit {
   }
 
   public cadastrarUsuario(): void {
-    if (this.formulario.status === 'INVALID') {
+    if (this.formulario.status === 'INVALID')
       this.formulario.markAllAsTouched();
-      
-    } else {
+    
+    else {
       let usuario: Usuario = this.formulario.value;
 
       this.autenticacaoService.cadastrarUsuario(usuario)

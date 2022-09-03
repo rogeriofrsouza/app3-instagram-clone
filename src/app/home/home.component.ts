@@ -27,14 +27,15 @@ export class HomeComponent implements OnInit {
   
   public incluirPublicacao(): void {
     this.atualizarIcon('add');
+    let incluirPubl = this.incluirPublicacaoComponent;
 
-    this.incluirPublicacaoComponent.estadoPublicacao = 'pendente';
-    this.incluirPublicacaoComponent.tituloModal = 'Criar uma publicação';
-
-    let inputImagem = this.incluirPublicacaoComponent.inputImagem;
-    inputImagem !== undefined ? inputImagem.nativeElement.value = '' : null;
+    incluirPubl.estadoPublicacao = 'pendente';
+    incluirPubl.tituloModal = 'Criar uma publicação';
     
-    let formulario = this.incluirPublicacaoComponent.formulario;
+    if (incluirPubl.inputImagem !== undefined)
+      incluirPubl.inputImagem.nativeElement = '';
+    
+    let formulario = incluirPubl.formulario;
     formulario.setValue({ 'titulo': null, 'imagem': null });
     formulario.get('titulo')?.markAsUntouched();
   }
@@ -52,8 +53,14 @@ export class HomeComponent implements OnInit {
   }
 
   public openChange(event: boolean): void {
-    if (!event)
-      this.atualizarIcon('home');
+    // Modal aberto
+    if (event)
+      this.atualizarIcon('user');
+
+    // Modal fechado
+    else {
+      this.iconFill[1] === '-fill' ? this.atualizarIcon('add') : this.atualizarIcon('home');
+    }
   }
 
 }
