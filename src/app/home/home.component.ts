@@ -30,10 +30,10 @@ export class HomeComponent implements OnInit {
     let incluirPubl = this.incluirPublicacaoComponent;
 
     incluirPubl.estadoPublicacao = 'pendente';
-    incluirPubl.tituloModal = 'Criar uma publicação';
-    
-    if (incluirPubl.inputImagem !== undefined)
-      incluirPubl.inputImagem.nativeElement = '';
+    incluirPubl.tituloModal = 'Criar nova publicação';
+
+    if (incluirPubl.imagem !== undefined)
+      incluirPubl.inputImagem.nativeElement.value = '';
     
     let formulario = incluirPubl.formulario;
     formulario.setValue({ 'titulo': null, 'imagem': null });

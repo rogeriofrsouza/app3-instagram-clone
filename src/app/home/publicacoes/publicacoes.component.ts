@@ -25,7 +25,7 @@ export class PublicacoesComponent implements OnInit {
 
         this.atualizarTimeline();
       }
-    })
+    });
   }
 
   public atualizarTimeline(): void {

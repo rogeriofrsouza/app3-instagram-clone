@@ -1,0 +1,11 @@
+.modal-header {
+  height: 42px;
+}
+
+.modal-title {
+  font-size: 16px;
+}
+
+.modal-body {
+  padding: 24px !important;
+}

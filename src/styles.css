@@ -6,15 +6,18 @@
   box-sizing: border-box;
 }
 
+
 /* ===== BASE ========== */
 html, body {
   height: 100%;
+  font-size: 14px;
 }
 
 a {
   text-decoration: none !important;
   cursor: pointer;
 }
+
 
 /* ===== LAYOUT ========== */
 .bg-padrao {
