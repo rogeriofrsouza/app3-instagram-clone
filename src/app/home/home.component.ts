@@ -51,4 +51,9 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  public openChange(event: boolean): void {
+    if (!event)
+      this.atualizarIcon('home');
+  }
+
 }

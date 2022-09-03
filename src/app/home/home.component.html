@@ -15,10 +15,30 @@
         <img src="../../assets/icons/add{{ iconFill[1] }}.svg" alt="Nova publicação icon" />
       </a>
 
-      <div class="icon m-0" (click)="atualizarIcon('user')">
-        <img src="../../assets/icons/user{{ iconFill[2] }}.svg" alt="Perfil do usuário icon" />
+      <!-- Dropdown -->
+      <div ngbDropdown (openChange)="openChange($event)" class="d-inline-block">
+        <div class="icon m-0" (click)="atualizarIcon('user')" ngbDropdownToggle>
+          <img src="../../assets/icons/user{{ iconFill[2] }}.svg" alt="Perfil do usuário icon" />
+        </div>
+
+        <div ngbDropdownMenu aria-labelledby="dropdown">
+          <div style="position: relative;">
+            <div class="teste"></div>
+
+            <div ngbDropdownItem style="cursor: pointer;">
+              <img src="../../assets/icons/bookmark.svg" alt="Home icon" style="margin-right: 12px; height: 16px;"/>
+              Salvos
+            </div>
+            <div ngbDropdownItem style="cursor: pointer;">
+              <img src="../../assets/icons/settings.svg" alt="Home icon" style="margin-right: 12px; height: 16px;"/>
+              Configurações
+            </div>
+            
+            <hr class="m-0" />
+            <button ngbDropdownItem (click)="sair()">Sair</button>
+          </div>
+        </div>
       </div>
-         
     </div>
   </div>
 </nav>
@@ -27,12 +47,10 @@
   <div class="container mt-4">
     <app-publicacoes #publicacoesComponent></app-publicacoes>
 
-    <!-- Modal -->
     <app-incluir-publicacao 
-      #incluirPublicacaoComponent 
-      (atualizarTimeline)="atualizarTimeline()" 
-      (atualizarHomeIcon)="atualizarIcon('home')"
-    >
+        #incluirPublicacaoComponent 
+        (atualizarTimeline)="atualizarTimeline()" 
+        (atualizarHomeIcon)="atualizarIcon('home')">
     </app-incluir-publicacao>
   </div>
 </div>

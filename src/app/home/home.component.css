@@ -23,3 +23,49 @@
 .logo, .profile {
   cursor: pointer;
 }
+
+.dropdown-toggle::after {
+  display: none;
+}
+
+.dropdown-menu[data-bs-popper] {
+  width: 230px;
+  font-size: 14px;
+
+  top: 140%;
+  left: -550%;
+
+  padding-top: 0;
+  padding-bottom: 0;
+
+  border-radius: 4px;
+
+  z-index: 2;
+}
+
+.dropdown-item {
+  height: 40px;
+  padding: 8px 16px;
+}
+
+.teste {
+  height: 20px;
+  width: 15px;
+
+  position: absolute;
+  z-index: 3;
+
+  top: -11px;
+  right: 79px;
+
+  transform: rotate(90deg);
+  clip-path: path('M8 0C8 4 9.32406e-08 7.819 1.25211e-07 10.5C1.57188e-07 13.1815 8 17.0005 8 21L8 0Z');
+
+  background-color: #e9ecef;
+}
+
+/*
+  .shadow {
+    -webkit-filter: drop-shadow(0 0 5px rgba(var(--web-always-black), .0975)) !important;
+  }
+*/
