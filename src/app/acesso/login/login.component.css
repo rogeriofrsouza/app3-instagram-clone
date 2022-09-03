@@ -1,9 +1,22 @@
 .card-title {
-  background-image: url("/assets/logo-instagram.png");
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 60px;
+  height: 51px;
   width: 100%;
+}  
+
+.logo-instagram {
+  height: 100%;
+}
+
+.form-control {
+  height: 36px !important;
+}
+
+button {
+  height: 30px !important;
+}
+
+.form-control, button {
+  width: 268px !important;
 }
 
 button {

@@ -1,14 +1,27 @@
 <div class="row" *ngFor="let publicacao of publicacoes">
   <div class="col d-flex justify-content-center">
     <div class="card">
+
+      <!-- Card title -->
       <div class="p-12">
-        <p class="card-text"><strong>{{ publicacao.nomeUsuario }}</strong></p>
+        <div class="d-flex justify-content-between">
+          <a>
+            <img src="../../../assets/icons/user.svg" alt="Imagem usuário">
+            <span class="card-text ml-10 fw-600">{{ publicacao.nomeUsuario }}</span>
+          </a>
+
+          <a>
+            <img src="../../../assets/icons/more.svg" alt="Mais opções ícone">
+          </a>
+        </div>
       </div>
 
+      <!-- Card imagem -->
       <div class="img-box">
         <img class="card-img" [src]="publicacao.urlImagem" />
       </div>
       
+      <!-- Icons-->
       <div class="card-body p-12">
         <div class="d-flex justify-content-between">
           <div class="d-flex align-items-center gap-3">
@@ -20,10 +33,12 @@
           <img class="icon" src="../../../assets/icons/bookmark.svg" alt="Ícone de" />
         </div>
 
+        <!-- Publicação -->
         <p class="card-text mt-3">
-          <strong>{{ publicacao.nomeUsuario }}</strong> {{ publicacao.titulo }}
+          <a class="fw-600">{{ publicacao.nomeUsuario }}</a> {{ publicacao.titulo }}
         </p>
 
+        <!-- Comentário -->
         <hr />
         <input 
           type="text" 

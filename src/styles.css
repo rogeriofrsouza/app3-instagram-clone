@@ -6,7 +6,6 @@
   box-sizing: border-box;
 }
 
-
 /* ===== BASE ========== */
 html, body {
   height: 100%;
@@ -18,7 +17,6 @@ a {
   cursor: pointer;
 }
 
-
 /* ===== LAYOUT ========== */
 .bg-padrao {
   background: #FAFAFA;
@@ -28,6 +26,7 @@ a {
   position: relative;
 }
 
+/* ===== VALIDATION INPUTS ========== */
 input.ng-valid.ng-touched {
   border: 1px solid #198754;
 }
@@ -36,9 +35,10 @@ input.ng-invalid.ng-touched {
   border: 1px solid #dc3545;
 }
 
+/* ===== VALIDATION ICONS ========== */
 .icon-x-altx-alt, .icon-check-circle {
   position: absolute;
-  right: 28px;
+  right: 50px;
 }
 
 .icon-x-altx-alt {
@@ -54,6 +54,21 @@ input.ng-invalid.ng-touched {
   cursor: pointer;
 }
 
+/* ===== PADDING ========== */
 .p-12 {
   padding: 12px !important;
+}
+
+/* ===== MARGIN ========== */
+.ml-10 {
+  margin-left: 10px !important;
+}
+
+/* ===== FONTS ========== */
+.fs-12 {
+  font-size: 12px;
+}
+
+.fw-600 {
+  font-weight: 600 !important;
 }

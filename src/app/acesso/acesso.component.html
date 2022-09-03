@@ -1,17 +1,17 @@
 <div class="container">
   <div class="row">
     <!-- Banner -->
-    <div class="col-sm-6 d-flex justify-content-end" [@animacao-banner]>
+    <div class="col-sm-6 d-flex justify-content-end" [@animacao-banner] style="margin-top: -1.5rem; margin-right: 32px;">
       <app-banner></app-banner>
     </div>
 
     <!-- Cadastro -->
-    <div class="col-sm-6 d-flex justify-content-start" [@animacao-painel] *ngIf="cadastro">
+    <div class="col-sm-5 d-flex justify-content-start" [@animacao-painel] *ngIf="cadastro">
       <app-cadastro (exibirPainel)="exibirPainel($event)"></app-cadastro>
     </div>
     
     <!-- Login -->
-    <div class="col-sm-6 d-flex justify-content-start" [@animacao-painel] *ngIf="!cadastro">
+    <div class="col-sm-5 d-flex justify-content-start" [@animacao-painel] *ngIf="!cadastro">
       <app-login (exibirPainel)="exibirPainel($event)"></app-login>
     </div>
   </div>

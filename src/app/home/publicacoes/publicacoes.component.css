@@ -23,3 +23,7 @@
 .comentario:focus {
   box-shadow: none !important;
 }
+
+a {
+  color: #212529 !important;
+}
