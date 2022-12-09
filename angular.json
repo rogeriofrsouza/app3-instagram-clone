@@ -101,10 +101,14 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }
   },
+  "defaultProject": "app3-instagram-clone",
   "cli": {
     "analytics": "19610c10-33e1-4a03-9078-53c37cf2382b"
   }

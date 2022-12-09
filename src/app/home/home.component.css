@@ -1,5 +1,4 @@
 .navbar {
-  height: 60px;
   /*padding: 26px 40px;*/
   width: 100%;
   border-bottom: solid 1px #E6E6E6;
@@ -67,8 +66,24 @@
   background-color: #d7d7d7;
 }
 
+.mt-container {
+  margin-top: 8vh;
+}
+
 /*
   .shadow {
     -webkit-filter: drop-shadow(0 0 5px rgba(var(--web-always-black), .0975)) !important;
   }
 */
+
+@media (min-width: 992px) {
+  .mt-container {
+    margin-top: 6vh;
+  }
+}
+
+@media (min-width: 1400px) {
+  .mt-container {
+    margin-top: 4vh;
+  }
+}

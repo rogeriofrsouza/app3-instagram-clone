@@ -1,7 +1,9 @@
 <div class="card" style="width: 350px;">
   <div class="card-body py-4 px-0">
+
+    <!-- Instagram Logo -->
     <div class="card-title d-flex justify-content-center mt-4">
-      <img class="logo-instagram" src="../../../assets/logo-instagram.png" alt="Logo Instagram">
+      <img class="logo-instagram" src="./assets/logo-instagram.png" alt="Logo Instagram">
     </div>
 
     <form [formGroup]="formulario" (ngSubmit)="autenticarUsuario()" class="d-flex flex-column align-items-center mt-4">
@@ -33,6 +35,7 @@
       <button type="submit" class="btn btn-primary btn-sm my-3" [disabled]="formulario.status === 'INVALID'">Entrar</button>
     </form>
     
+    <!-- Mensagem de erro -->
     <div *ngIf="errorMessage.length">
       <hr />
       <p class="small text-danger text-center">{{ errorMessage }}</p>

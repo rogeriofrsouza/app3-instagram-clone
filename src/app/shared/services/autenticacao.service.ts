@@ -52,6 +52,7 @@ export class AutenticacaoService {
       
       token === null ? this.router.navigateByUrl('') : this.idToken = token;
     }
+    
     return this.idToken !== '';
   }
 

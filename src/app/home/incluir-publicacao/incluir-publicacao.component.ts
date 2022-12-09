@@ -1,6 +1,6 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
-import { Auth, getAuth, onAuthStateChanged, User } from 'firebase/auth';
+import { Auth, getAuth, onAuthStateChanged } from 'firebase/auth';
 import { interval, Observable, Subject, takeUntil } from 'rxjs';
 
 import { DbService } from './../../shared/services/db.service';
@@ -19,8 +19,8 @@ export class IncluirPublicacaoComponent implements OnInit {
   @ViewChild('inputImagem') public inputImagem!: ElementRef;
 
   public formulario = new UntypedFormGroup({
-    titulo: new UntypedFormControl(null, [ Validators.required, Validators.minLength(6) ]),
-    imagem: new UntypedFormControl(null, [ Validators.required ])
+    'titulo': new UntypedFormControl(null, [ Validators.required, Validators.minLength(6) ]),
+    'imagem': new UntypedFormControl(null, [ Validators.required ])
   });
 
   public emailUsuario: string = '';
@@ -37,7 +37,7 @@ export class IncluirPublicacaoComponent implements OnInit {
   ngOnInit(): void {
     const auth: Auth = getAuth();
 
-    onAuthStateChanged(auth, (user: User | null) => {
+    onAuthStateChanged(auth, (user) => {
       if (user) {
         this.emailUsuario = user.email !== null ? user.email : '';
       }
@@ -65,6 +65,7 @@ export class IncluirPublicacaoComponent implements OnInit {
         case 'concluido': 
           this.tituloModal = 'Publicação realizada com sucesso';
           this.downloadURL = this.progressoService.downloadURL;
+
           continua.next(false);
           this.atualizarTimeline.emit();
           break;
@@ -72,6 +73,7 @@ export class IncluirPublicacaoComponent implements OnInit {
         case 'erro':
           this.tituloModal = 'Erro na publicação';
           this.erro = this.progressoService.erro;
+
           continua.next(false);
           break;
       }

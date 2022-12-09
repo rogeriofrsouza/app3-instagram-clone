@@ -1,6 +1,6 @@
 import { Publicacao } from './../models/publicacao.model';
 import { Injectable } from '@angular/core';
-import { Database, DataSnapshot, get, getDatabase, orderByKey, push, query, ref as databaseRef } from 'firebase/database';
+import { Database, DataSnapshot, get, getDatabase, orderByKey, push, query, ref as databaseRef, DatabaseReference } from 'firebase/database';
 import { FirebaseStorage, getDownloadURL, getStorage, ref as storageRef, StorageError, uploadBytesResumable, UploadTask, UploadTaskSnapshot } from 'firebase/storage';
 
 import { ProgressoService } from './progresso.service';
@@ -12,14 +12,16 @@ export class DbService {
 
   constructor(private progressoService: ProgressoService) { }
 
+  /* Envia publicação do usuário */
   public publicar(titulo: string, emailUsuario: string, imagem: File): void {
     const db: Database = getDatabase();
     
     push(databaseRef(db, `publicacoes/${btoa(emailUsuario)}`), { titulo: titulo })
-      .then((reference: any) => {
+      .then((reference: DatabaseReference) => {
 
-        let nomeImagem: string = reference.key;
+        let nomeImagem: string | null = reference.key;
         
+        /* Enviando imagem para upload no Firebase Storage */
         const storage: FirebaseStorage = getStorage();
         const uploadTask: UploadTask = uploadBytesResumable(storageRef(storage, `imagens/${nomeImagem}`), imagem);
     
@@ -34,7 +36,9 @@ export class DbService {
           }, 
           (error: StorageError) => {
             this.progressoService.estado = 'erro';
-            this.progressoService.erro = error.serverResponse !== null ? error.serverResponse : '';
+
+            if (error.serverResponse !== null)
+              this.progressoService.erro = error.serverResponse;
           }, 
           () => {
             getDownloadURL(uploadTask.snapshot.ref).then((downloadURL: string) => {
@@ -47,6 +51,7 @@ export class DbService {
       .catch((error: Error) => console.log(error));
   }
 
+  /* Recupera publicações do usuário */
   public consultaPublicacoes(emailUsuario: string): Promise<Publicacao[]> {
     return new Promise((resolve, reject) => {
       const db: Database = getDatabase();
@@ -59,18 +64,21 @@ export class DbService {
             snapshot.forEach((child: DataSnapshot) => {
               let publicacao: Publicacao = child.val();
 
-              publicacao.key = child.key !== null ? child.key : '';              
+              if (child.key !== null)
+                publicacao.key = child.key;
+
               publicacoes.push(publicacao);
             });
           } else {
             console.log('Nenhum dado disponível');
           }
+
           return publicacoes.reverse();
         })
         .then((publicacoes: Publicacao[]) => {
           const storage: FirebaseStorage = getStorage();
 
-          publicacoes.forEach((publicacao: Publicacao) => {
+          publicacoes.forEach(publicacao => {
             getDownloadURL(storageRef(storage, `imagens/${publicacao.key}`))
               .then((downloadURL: string) => {
                 publicacao.urlImagem = downloadURL;
@@ -79,6 +87,7 @@ export class DbService {
                   .then((snapshot: DataSnapshot) => publicacao.nomeUsuario = snapshot.val().nome);
               });
           });
+          
           resolve(publicacoes);
         })
         .catch((error: Error) => reject(error));

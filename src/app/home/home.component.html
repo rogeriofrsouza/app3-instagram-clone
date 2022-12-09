@@ -1,36 +1,37 @@
-<nav class="navbar fixed-top navbar-light bg-white">
+<nav class="navbar fixed-top bg-white">
   <div class="container">
+
     <!-- Logo -->
-    <a routerLink="/home">
-      <img class="logo" src="../../assets/logo-instagram.png" alt="Logo Instagram" />
+    <a class="navbar-brand" routerLink="/home">
+      <img class="logo" src="./assets/logo-instagram.png" alt="Logo Instagram" />
     </a>
 
     <!-- Menu -->
-    <div class="d-flex align-items-center" style="height: 24px;">
+    <div class="d-flex align-items-center">
       <a class="icon" routerLink="/home" (click)="atualizarIcon('home')">
-        <img src="../../assets/icons/home{{ iconFill[0] }}.svg" alt="Home icon" />
+        <img src="./assets/icons/home{{ iconFill[0] }}.svg" alt="Home icon" />
       </a>
-
+      
       <a class="icon" data-bs-toggle="modal" data-bs-target="#incluirPublicacaoModal" (click)="incluirPublicacao()">
-        <img src="../../assets/icons/add{{ iconFill[1] }}.svg" alt="Nova publicação icon" />
+        <img src="./assets/icons/add{{ iconFill[1] }}.svg" alt="Nova publicação icon" />
       </a>
-
+  
       <!-- Dropdown -->
       <div ngbDropdown (openChange)="openChange($event)" class="d-inline-block">
         <div class="icon m-0" ngbDropdownToggle>
-          <img src="../../assets/icons/user{{ iconFill[2] }}.svg" alt="Perfil do usuário icon" />
+          <img src="./assets/icons/user{{ iconFill[2] }}.svg" alt="Perfil do usuário icon" />
         </div>
-
+  
         <div ngbDropdownMenu aria-labelledby="dropdown">
           <div style="position: relative;">
             <div class="dropdown-pin"></div>
-
+  
             <div ngbDropdownItem style="cursor: pointer;">
-              <img src="../../assets/icons/bookmark.svg" alt="Home icon" style="margin-right: 12px; height: 16px;"/>
+              <img src="./assets/icons/bookmark.svg" alt="Home icon" style="margin-right: 12px; height: 16px;"/>
               Salvos
             </div>
             <div ngbDropdownItem style="cursor: pointer;">
-              <img src="../../assets/icons/settings.svg" alt="Home icon" style="margin-right: 12px; height: 16px;"/>
+              <img src="./assets/icons/settings.svg" alt="Home icon" style="margin-right: 12px; height: 16px;"/>
               Configurações
             </div>
             
@@ -45,7 +46,7 @@
 
 <!-- Publicações -->
 <div class="bg-padrao">
-  <div class="container mt-5">
+  <div class="container mt-container">
     <app-publicacoes #publicacoesComponent></app-publicacoes>
 
     <app-incluir-publicacao 

@@ -7,66 +7,64 @@
         <!--<button type="button" class="btn-close" data-bs-dismiss="modal" (click)="atualizarIconMenu()" aria-label="Close"></button>-->
       </div>
 
-      <div [ngSwitch]="estadoPublicacao">
+      <div class="modal-body" [ngSwitch]="estadoPublicacao"> 
         
         <!-- Pendente -->
-        <div class="modal-body">  
-          <div *ngSwitchCase="'pendente'">
-            <form [formGroup]="formulario" (ngSubmit)="publicar()">
-              <div class="d-flex flex-column">
-                <input 
-                  #inputImagem
-                  type="file" 
-                  class="form-control" 
-                  accept="image/*" 
-                  (change)="preparaImagemUpload($event)" 
-                />
-                <textarea 
-                  type="text" 
-                  placeholder="Escreva uma legenda..." 
-                  rows="5"
-                  class="form-control mt-4"
-                  formControlName="titulo" 
-                >
-                </textarea>
-              </div>
-        
-              <div class="d-flex gap-2 mt-4">
-                <button type="submit" class="btn btn-primary" [disabled]="formulario.status === 'INVALID'">Publicar</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="atualizarIconMenu()">Fechar</button>
-              </div>
-            </form>
-          </div>
-        
-          <!-- Andamento -->
-          <div *ngSwitchCase="'andamento'">
-            <div class="progress">
-              <div 
-                class="progress-bar" 
-                role="progressbar" 
-                aria-label="Barra de progresso" 
-                [style.width]="progressoUpload + '%'" 
-                [attr.aria-valuenow]="progressoUpload" 
-                aria-valuemin="0" 
-                aria-valuemax="100"
+        <div *ngSwitchCase="'pendente'">
+          <form [formGroup]="formulario" (ngSubmit)="publicar()">
+            <div class="d-flex flex-column">
+              <input 
+                #inputImagem
+                type="file" 
+                class="form-control" 
+                accept="image/*" 
+                (change)="preparaImagemUpload($event)" 
+              />
+              <textarea 
+                type="text" 
+                placeholder="Escreva uma legenda..." 
+                rows="5"
+                class="form-control mt-4"
+                formControlName="titulo" 
               >
-                {{ progressoUpload }}%
-              </div>
+              </textarea>
+            </div>
+      
+            <div class="d-flex gap-2 mt-4">
+              <button type="submit" class="btn btn-primary" [disabled]="formulario.status === 'INVALID'">Publicar</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="atualizarIconMenu()">Fechar</button>
+            </div>
+          </form>
+        </div>
+      
+        <!-- Andamento -->
+        <div *ngSwitchCase="'andamento'">
+          <div class="progress">
+            <div 
+              class="progress-bar" 
+              role="progressbar" 
+              aria-label="Barra de progresso" 
+              [style.width]="progressoUpload + '%'" 
+              [attr.aria-valuenow]="progressoUpload" 
+              aria-valuemin="0" 
+              aria-valuemax="100"
+            >
+              {{ progressoUpload }}%
             </div>
           </div>
-        
-          <!-- Concluído 
-          <div *ngSwitchCase="'concluido'">
-            <p>Publicação realizada com sucesso!</p>
-            <p>Arquivo disponível <a [href]="downloadURL" target="_blank">aqui</a></p>
-          </div>
-          -->
-        
-          <!-- Erro -->
-          <div *ngSwitchCase="'erro'">
-            <p>Erro na publicação, tente novamente!</p>
-            <p>{{ erro }}</p>
-          </div>
+        </div>
+      
+        <!-- Concluído 
+        <div *ngSwitchCase="'concluido'">
+          <p>Publicação realizada com sucesso!</p>
+          <p>Arquivo disponível <a [href]="downloadURL" target="_blank">aqui</a></p>
+        </div>
+        -->
+      
+        <!-- Erro -->
+        <div *ngSwitchCase="'erro'">
+          <p>Erro na publicação, tente novamente!</p>
+          <p>{{ erro }}</p>
         </div>
       </div>
     </div>

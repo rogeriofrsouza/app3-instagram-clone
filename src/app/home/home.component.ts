@@ -54,9 +54,9 @@ export class HomeComponent implements OnInit {
 
   public openChange(event: boolean): void {
     // Modal aberto
-    if (event)
+    if (event) {
       this.atualizarIcon('user');
-
+    }
     // Modal fechado
     else {
       this.iconFill[1] === '-fill' ? this.atualizarIcon('add') : this.atualizarIcon('home');

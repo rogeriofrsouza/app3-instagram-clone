@@ -5,7 +5,7 @@
 }
 
 .img-box {
-  width: 470px;
+  max-width: 470px;
   max-height: 587px;
 }
 

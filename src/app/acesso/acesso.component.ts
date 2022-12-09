@@ -30,7 +30,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AcessoComponent implements OnInit {
 
-  public cadastro: boolean = false;
+  public acesso: string = 'login';
 
   constructor() { }
 
@@ -38,7 +38,7 @@ export class AcessoComponent implements OnInit {
   }
 
   public exibirPainel(event: string): void {
-    this.cadastro = event === 'cadastro' ? true : false;
+    this.acesso = event;
   }
 
 }
